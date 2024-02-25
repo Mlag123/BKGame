@@ -18,12 +18,12 @@ public class Window extends JFrame {
     }
 
     public static void main(String[] args) {
-        //new Window();
+        new Window();
 
-        Vector2D vec1 = new Vector2D(7, 4);
-        Vector2D vec2 = Vector2D.normalVector2D(vec1);
+      //  Vector2D vec1 = new Vector2D(7, 4);
+      //  Vector2D vec2 = Vector2D.normalVector2D(vec1);
 
 
-        System.out.println(vec2.getX()+" "+vec2.getY());
+      //  System.out.println(vec2.getX()+" "+vec2.getY());
     }
 }

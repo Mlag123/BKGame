@@ -43,6 +43,8 @@ public class PanelGame extends JComponent {
             long startTime = System.nanoTime();
             initKeyboard();
             drawGame();
+            player.changeLocation(10,2);
+            System.out.println(player.getX());
 
 
             render();

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.lang.reflect.AnnotatedArrayType;
+
 import Math.Vector2D;
 
 public class Player {
@@ -19,22 +20,27 @@ public class Player {
     private double maxSpeed = 0.2f;
     private double minSpeed = 0.1f;
     private float angle = 0;
-    private final Image image;
+    //  private final Image image;
     private boolean speedUP = false;
     //  private boolean speedDown = false;
 
 
     public Player() {
-        this.image = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
-        Vector2D playerVector = new Vector2D();
+        super(new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage());
+        //      this.image = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
+        playerVector = getVector2D();
+        this.x = playerVector.getX();
+        this.y = playerVector.getY();
+
+
 
     }
 
-    public void changeLocation(double x, double y) {
-        this.x = x;
-        this.y = y;
-
-    }
+//    public void changeLocation(double x, double y) {
+//        this.x = x;
+//        this.y = y;
+//
+//    }
 
     public double getX() {
         return x;
@@ -56,8 +62,10 @@ public class Player {
             angle = 0;
         }
         this.angle = angle;
+
     }
 
+    @Override
     public void draw(Graphics2D g2) {
         AffineTransform oldTrans = g2.getTransform();
         g2.translate(x, y);
@@ -67,7 +75,6 @@ public class Player {
 
     }
 
-
     public void moveUP() {
 
 
@@ -75,16 +82,19 @@ public class Player {
             dy = -0;
         } else {
 
-            dy = dy -  15 * speed / PanelGame.deltaTime;
+            dy = dy - 15 * speed / PanelGame.deltaTime;
         }
     }
 
     public void gravity() {
-        if (dy >= 720 - 165) {
-            dy = 720 - 165;
-        } else {
-            dy = dy + 0.2 * gravity;
-        }
+//        if (dy >= 720 - 165) {
+//            dy = 720 - 165;
+//        } else {
+//            dy = dy + 0.2 * gravity;
+//        }
+
+
+
     }
 
     public void moveDown() {
@@ -120,7 +130,7 @@ public class Player {
             speed += 0.01f;
         } else {
             speed += 0.01f;
-       }
+        }
 //
 //
 //        if (x >= 1145) {
@@ -141,7 +151,7 @@ public class Player {
 
     public void update() {
 
-        speed=0.5;
+        speed = 0.5;
 
         y = dy;
         x = dx;

@@ -1,8 +1,5 @@
 package Math;
 
-import logging.Color;
-import logging.Logging;
-import logging.logs;
 
 import java.util.logging.Logger;
 
@@ -22,20 +19,8 @@ public class Vector2D {
 
 
 
-
-
-
-
-
-
     public static double getLongVector(double x, double y) {
 
-        return Math.sqrt((x * x) + (y * y));
-
-    }
-
-    public double getLongVector() {
-        double x = getX(), y = getY();
         return Math.sqrt((x * x) + (y * y));
 
     }
@@ -46,9 +31,13 @@ public class Vector2D {
         x = x / longVector;
         y = y / longVector;
 
-
-        //
         return new Vector2D(x, y);
+    }
+
+    public double getLongVector() {
+        double x = getX(), y = getY();
+        return Math.sqrt((x * x) + (y * y));
+
     }
 
     public  double getX() {
