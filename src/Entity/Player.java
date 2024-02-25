@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.lang.reflect.AnnotatedArrayType;
+import Math.Vector2D;
 
 public class Player {
     public static final double PLAYER_SIZE = 64;
@@ -25,6 +26,7 @@ public class Player {
 
     public Player() {
         this.image = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
+        Vector2D playerVector = new Vector2D();
 
     }
 
@@ -111,14 +113,14 @@ public class Player {
     }
 
     public void moveRight() {
-//
-//        if (speed > maxSpeed) {
-//            speed = maxSpeed;
-//        } else if (speed <= 0) {
-//            speed += 0.01f;
-//        } else {
-//            speed += 0.01f;
-//        }
+
+        if (speed > maxSpeed) {
+            speed = maxSpeed;
+        } else if (speed <= 0) {
+            speed += 0.01f;
+        } else {
+            speed += 0.01f;
+       }
 //
 //
 //        if (x >= 1145) {
@@ -138,6 +140,7 @@ public class Player {
     }
 
     public void update() {
+
         speed=0.5;
 
         y = dy;

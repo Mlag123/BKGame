@@ -53,6 +53,7 @@ public class PanelGame extends JComponent {
                 deltaTime = sleep;
                 sleep(sleep);
             }
+            System.out.println("Delta-FPS = "+deltaTime);
 
         }
 
@@ -90,6 +91,7 @@ public class PanelGame extends JComponent {
             public void keyPressed(KeyEvent e) {
 
                 if (e.getKeyCode() == KeyEvent.VK_W) {
+
                     key.setKey_up(true);
                     player.moveUP();
 
