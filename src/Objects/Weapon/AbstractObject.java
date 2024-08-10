@@ -1,17 +1,25 @@
 package Objects.Weapon;
 
+import Engine.PanelGame;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-public class AbstractBullet {
+public class AbstractObject {
     public double x, y;
     public final float speed = 0.3f;
     public static final double Bullet_SIZE = 42;
     public float angle = 0;
-    public final Image image_bullet;
+    public final Image image;
+    public int spriteHeight;
+    public int spriteWidth;
 
-    public AbstractBullet(Image imageBullet) {
-        image_bullet = imageBullet;
+    public AbstractObject(Image image) {
+        PanelGame.objectArrayList.add(this);
+        spriteHeight = image.getHeight(null);
+        spriteWidth = image.getWidth(null);
+        this.image = image;
+
     }
 
     public double getX() {
@@ -29,7 +37,7 @@ public class AbstractBullet {
     public void draw(Graphics2D g2) {
         AffineTransform oldTrans = g2.getTransform();
         g2.translate(x, y);
-        g2.drawImage(image_bullet, 0, 0, null);
+        g2.drawImage(image, 0, 0, null);
 
         g2.setTransform(oldTrans);
 

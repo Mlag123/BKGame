@@ -7,47 +7,36 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.lang.reflect.AnnotatedArrayType;
 
+import Engine.TickListener;
+import Engine.Ticker;
+import Engine.Window;
 import Math.Vector2D;
+import Objects.Weapon.AbstractObject;
 
-public class Player {
+public class Player extends AbstractEntity {
     public static final double PLAYER_SIZE = 64;
     private double gravity = 150;
-    private double x;
-    private double y;
+    //   private double x;
+    //   private double y;
+    //   public Ticker          ticker = new Ticker(1);
     private double dx = 0;
     private double dy = 0;
-    private double speed = 0;
+    private double speed = 0.1;
     private double maxSpeed = 0.2f;
     private double minSpeed = 0.1f;
     private float angle = 0;
+    public boolean isGravity = true;
+    private Vector2D playerVector;
     //  private final Image image;
     private boolean speedUP = false;
     //  private boolean speedDown = false;
+    private final static Image player_sprite = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
 
 
     public Player() {
-        super(new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage());
-        //      this.image = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
-        playerVector = getVector2D();
-        this.x = playerVector.getX();
-        this.y = playerVector.getY();
+        super(player_sprite);
 
 
-
-    }
-
-//    public void changeLocation(double x, double y) {
-//        this.x = x;
-//        this.y = y;
-//
-//    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
     }
 
 
@@ -65,73 +54,64 @@ public class Player {
 
     }
 
-    @Override
-    public void draw(Graphics2D g2) {
-        AffineTransform oldTrans = g2.getTransform();
-        g2.translate(x, y);
-        g2.drawImage(image, oldTrans, null);
-
-        g2.setTransform(oldTrans);
-
-    }
 
     public void moveUP() {
-
-
-        if (dy <= 0) {
-            dy = -0;
+        if (!(y <= 0)) {
+            double _y;
+            _y = y;
+            y = (_y - 700 * speed);
         } else {
-
-            dy = dy - 15 * speed / PanelGame.deltaTime;
+            y = 0;
         }
+
+
     }
 
-    public void gravity() {
-//        if (dy >= 720 - 165) {
-//            dy = 720 - 165;
-//        } else {
-//            dy = dy + 0.2 * gravity;
-//        }
+    public void gravity(AbstractObject object) {
 
+
+        if (isGravity) {
+
+            if (!((object.y - object.spriteHeight) - (y - spriteWidth+23) <= 0)) {
+
+                double _y;
+                _y = y;
+                y = (_y + 20 * 0.1);
+           //     System.out.println((object.y - object.spriteHeight) - (y - spriteWidth));
+
+
+            } else {
+
+            }
+            //        System.out.println("PLAYER POS : Y"+y);
+
+        }
 
 
     }
 
     public void moveDown() {
-//
-//        if (y >= 720 - 165) {
-//            y = 720 - 165;
-//        } else {
-//            y = y + 15 * speed / PanelGame.deltaTime;
-//        }
+        double _y;
+        _y = y;
+        y = (_y + 20 * speed);
+
     }
 
     public void moveLeft() {
-//        if (speed > maxSpeed) {
-//            speed = maxSpeed;
-//        } else if (speed <= 0) {
-//            speed -= 0.01f;
-//        } else {
-//            speed += 0.01f;
-//        }
-//        if (x <= 0) {
-//            x = 0;
-//        } else {
-//            x = x - 15 * speed / PanelGame.deltaTime;
-//            System.out.println(x);
-//        }
+        //   x = (x - 120 * speed);
+
+
+        if (!((Window.getWidthFrame() - (x)) >= Window.getWidthFrame())) {
+            x = (x - 120 * speed);
+        }
+
     }
 
     public void moveRight() {
 
-        if (speed > maxSpeed) {
-            speed = maxSpeed;
-        } else if (speed <= 0) {
-            speed += 0.01f;
-        } else {
-            speed += 0.01f;
+        if (!(0 >= Window.getWidthFrame() - (x + spriteWidth + 23))) {
+            x = (x + 120 * speed);
         }
-//
 //
 //        if (x >= 1145) {
 //            x = 1145;
@@ -144,23 +124,8 @@ public class Player {
     }
 
 
-    public void speedDown() {
-
-
-    }
-
     public void update() {
 
-        speed = 0.5;
 
-        y = dy;
-        x = dx;
-
-     /*   y = y + 1;
-        if (x >= 1280) {
-            this.x = 1280;
-        } else if (x <= 0) {
-            x = 0;
-        }*/
     }
 }

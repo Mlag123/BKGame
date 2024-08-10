@@ -1,34 +1,35 @@
 package Engine;
 
+import Engine.Controls.CustomKeyListener;
+import Entity.AbstractEntity;
 import Entity.Player;
+import Objects.Plate;
+import Objects.Weapon.AbstractObject;
 import Objects.Weapon.BulletAK47;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class PanelGame extends JComponent {
+    public static ArrayList<AbstractObject> objectArrayList = new ArrayList<>();
+    public static ArrayList<AbstractEntity> entityArrayList = new ArrayList<>();
     private Key key;
     private BulletAK47 bulletAK47;
-    private int width = 1280;
+    private int width = Window.getWidthFrame();
+    private int height = Window.getHeightFrame();
     private Player player;
     private Graphics2D g2;
-    private int height = 720;
-    private Thread thread;
     private boolean start = true;
     private BufferedImage image;
-
-    private final int FPS = 60;
-    private final int TARGET_TIME = 1000000000 / FPS;
-    public static long deltaTime = 0;
+    private Ticker ticker = new Ticker(20);
+    private Plate plate;
+    static String current_key = "stop";
 
 
     public PanelGame() {
-
-
     }
 
     public void start() {
@@ -39,23 +40,29 @@ public class PanelGame extends JComponent {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         initObjectGame();
-        while (start) {
-            long startTime = System.nanoTime();
-            initKeyboard();
-            drawGame();
-            player.changeLocation(10,2);
-            System.out.println(player.getX());
+        initKeyboard();
 
 
-            render();
-            drawBackground();
-            long time = System.nanoTime() - startTime;
-            if (time < TARGET_TIME) {
-                long sleep = (TARGET_TIME - time) / 1000000;
-                deltaTime = sleep;
-                sleep(sleep);
+        ticker.addTickListener(new TickListener() {
+            @Override
+            public void onTick(float deltaTime) {
+
+                drawGame();
+                // player.changeLocation(10,2);
+                plate.changeLocation(0, 500);
+
+                render();
+                drawBackground();
             }
-            System.out.println("Delta-FPS = "+deltaTime);
+        });
+
+
+        while (start) {
+            //   updateDraw();
+
+            ticker.update();
+
+            //   System.out.println("Delta-FPS = "+deltaTime+" class:"+PanelGame.class.getName());
 
         }
 
@@ -63,10 +70,15 @@ public class PanelGame extends JComponent {
     }
 
     public void drawGame() {
+        player.gravity(plate);
         player.draw(g2);
         player.update();
-        player.gravity();
+        plate.draw(g2);
         bulletAK47.draw(g2);
+    }
+
+    public void updateDraw() {
+
     }
 
     public void drawBackground() {
@@ -83,17 +95,20 @@ public class PanelGame extends JComponent {
     public void initKeyboard() {
         key = new Key();
         requestFocus();
-        addKeyListener(new KeyAdapter() {
-            @Override
+        addKeyListener(new CustomKeyListener(player));
+
+
+  /*      addKeyListener(new KeyAdapter() {
+       *//*     @Override
             public void keyTyped(KeyEvent e) {
                 super.keyTyped(e);
-            }
+            }*//*
 
             @Override
             public void keyPressed(KeyEvent e) {
 
                 if (e.getKeyCode() == KeyEvent.VK_W) {
-
+                    System.out.println("W");
                     key.setKey_up(true);
                     player.moveUP();
 
@@ -115,7 +130,7 @@ public class PanelGame extends JComponent {
 
             }
 
-
+*//*
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_W) {
@@ -134,8 +149,8 @@ public class PanelGame extends JComponent {
 
 
                 }
-            }
-        });
+            }*//*
+        });*/
        /* new Thread(new Runnable() {
             @Override
             public void run() {
@@ -161,18 +176,11 @@ public class PanelGame extends JComponent {
     public void initObjectGame() {
 
         player = new Player();
-      //  player.changeLocation(player.getX(), player.getY());
+        //  player.changeLocation(player.getX(), player.getY());
         bulletAK47 = new BulletAK47();
         bulletAK47.changeLocation(0, 0);
+        plate = new Plate();
 
-    }
-
-    public void sleep(long speed) {
-        try {
-            Thread.sleep(speed);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
