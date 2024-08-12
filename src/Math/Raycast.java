@@ -1,12 +1,17 @@
 package Math;
 
+import Engine.PanelGame;
 import Entity.AbstractEntity;
 import Objects.Weapon.AbstractObject;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Raycast {
 
 
-    private double x, y;
+    public double x, y;
     private Vector2D vector2D;
 
 
@@ -35,13 +40,27 @@ public class Raycast {
 
     }
 
-    public static AbstractObject getObject(Direction direction, Vector2D vector2D, AbstractEntity object){ //fixme
+    public AbstractObject getObject(Direction direction, double x, double y) { //fixme
+        //   ArrayList<AbstractObject> abstractObjects = PanelGame.objectArrayList;
+    //    Rectangle r = new Rectangle(10,10,101,0);
 
 
         if (direction == Direction.up) {
-            
 
         } else if (direction == Direction.down) {
+            for (AbstractObject _object : PanelGame.objectArrayList) {
+              //  long distance = (long) Math.sqrt(Math.pow(_object.getX() - x, 2) - Math.pow((_object.getY()) - y, 2));
+                //System.out.println("pos x = " + x + "| pos y = "+y+"| distance = "+distance+"| Object x = "+_object.getX()+"| Object y = "+ _object.getY());
+                //System.out.println("\n object name = "+_object.getClass().getName());
+                if (!(Math.sqrt(Math.pow(_object.getX() - x, 2) - Math.pow((_object.getY()) - y, 2)) <= 0)) {
+                    System.out.println("pos x = " + x + "| pos y = "+y+"| Object x = "+_object.getX()+"| Object y = "+ _object.getY()+"| object = "+_object.getClass().getName());
+                    return _object;
+                    //вычислять вектором от  отчки с помщью MAth.abd(AB), и после столкнговения луча, возвращать его
+
+                }
+
+            }
+
 
         } else if (direction == Direction.left) {
 
@@ -49,7 +68,8 @@ public class Raycast {
 
         }
 
-        return  (AbstractObject) new Object();
+        // return (AbstractObject) new Object();
+        return null;
     }
 
 

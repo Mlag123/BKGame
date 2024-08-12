@@ -1,22 +1,33 @@
 package Math;
 
 
+import java.util.Vector;
 import java.util.logging.Logger;
 
 public class Vector2D {
 
-    private double x, y;
+    public double x, y;
 
     public Vector2D() {
 
     }
+
+    public void changeCoordinates(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void changeCoordinates(Vector2D vector2D) {
+        this.y = vector2D.getX();
+        this.x = vector2D.getY();
+    }
+
 
     public Vector2D(double x, double y) {
         this.x = x;
         this.y = y;
 
     }
-
 
 
     public static double getLongVector(double x, double y) {
@@ -40,7 +51,7 @@ public class Vector2D {
 
     }
 
-    public  double getX() {
+    public double getX() {
         return x;
     }
 
@@ -48,7 +59,7 @@ public class Vector2D {
         this.x = x;
     }
 
-    public  double getY() {
+    public double getY() {
         return y;
     }
 

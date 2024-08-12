@@ -42,6 +42,11 @@ public class AbstractObject {
         g2.setTransform(oldTrans);
 
     }
+    public void changeLocation(double x, double y) {
+        this.x = x;
+        this.y = y;
+
+    }
 
     public void ChangeAngle(float angle) {
         if (angle < 0) {

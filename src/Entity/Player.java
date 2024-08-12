@@ -11,31 +11,30 @@ import Engine.TickListener;
 import Engine.Ticker;
 import Engine.Window;
 import Math.Vector2D;
+import Math.*;
 import Objects.Weapon.AbstractObject;
+import Utils.Utils;
 
 public class Player extends AbstractEntity {
     public static final double PLAYER_SIZE = 64;
     private double gravity = 150;
-    //   private double x;
-    //   private double y;
-    //   public Ticker          ticker = new Ticker(1);
+  //  private  Vector2D playerVector;
     private double dx = 0;
     private double dy = 0;
+    private double x, y;
     private double speed = 0.1;
     private double maxSpeed = 0.2f;
     private double minSpeed = 0.1f;
     private float angle = 0;
     public boolean isGravity = true;
-    private Vector2D playerVector;
-    //  private final Image image;
     private boolean speedUP = false;
-    //  private boolean speedDown = false;
     private final static Image player_sprite = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
 
 
     public Player() {
         super(player_sprite);
-
+        //        x = playerVector.getX();
+//        y = playerVector.getY();
 
     }
 
@@ -71,25 +70,35 @@ public class Player extends AbstractEntity {
 
 
         if (isGravity) {
-
-            if (!((object.y - object.spriteHeight) - (y - spriteWidth+23) <= 0)) {
+            if (!((object.y - object.spriteHeight) - (y - spriteWidth + 23) <= 0)) {
 
                 double _y;
                 _y = y;
                 y = (_y + 20 * 0.1);
-           //     System.out.println((object.y - object.spriteHeight) - (y - spriteWidth));
+
+
+                //     System.out.println((object.y - object.spriteHeight) - (y - spriteWidth));
 
 
             } else {
 
             }
-            //        System.out.println("PLAYER POS : Y"+y);
+
+
+            //   System.out.println(a.spriteHeight+" WIDTH"+ a.spriteWidth);
+
+
+            //  System.out.println("PLAYER POS : Y"+y);
 
         }
 
 
     }
 
+    /*
+
+                //
+     */
     public void moveDown() {
         double _y;
         _y = y;
@@ -118,13 +127,18 @@ public class Player extends AbstractEntity {
 //        } else {
 //
 //            x = x + 15 * speed / PanelGame.deltaTime;
-//        }
+//     }
 
 
     }
 
 
     public void update() {
+      //  System.out.println("x pos :"+x+" y pos "+ y);
+        vector2DEntity.changeCoordinates(x, y);
+
+      /*  Raycast raycast = new Raycast();
+        AbstractObject a = raycast.getObject(Direction.down,this.getX(),this.getY());*/
 
 
     }

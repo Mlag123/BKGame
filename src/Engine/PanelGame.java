@@ -6,6 +6,7 @@ import Entity.Player;
 import Objects.Plate;
 import Objects.Weapon.AbstractObject;
 import Objects.Weapon.BulletAK47;
+import Utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +18,7 @@ public class PanelGame extends JComponent {
     public static ArrayList<AbstractObject> objectArrayList = new ArrayList<>();
     public static ArrayList<AbstractEntity> entityArrayList = new ArrayList<>();
     private Key key;
-    private BulletAK47 bulletAK47;
+    //private BulletAK47 bulletAK47;
     private int width = Window.getWidthFrame();
     private int height = Window.getHeightFrame();
     private Player player;
@@ -46,7 +47,7 @@ public class PanelGame extends JComponent {
         ticker.addTickListener(new TickListener() {
             @Override
             public void onTick(float deltaTime) {
-
+                System.out.println(Utils.getMem());
                 drawGame();
                 // player.changeLocation(10,2);
                 plate.changeLocation(0, 500);
@@ -74,7 +75,7 @@ public class PanelGame extends JComponent {
         player.draw(g2);
         player.update();
         plate.draw(g2);
-        bulletAK47.draw(g2);
+      //  bulletAK47.draw(g2);
     }
 
     public void updateDraw() {
@@ -82,6 +83,7 @@ public class PanelGame extends JComponent {
     }
 
     public void drawBackground() {
+
         g2.setColor(new Color(0x008EFB));
         g2.fillRect(0, 0, width, height);
     }
@@ -177,8 +179,8 @@ public class PanelGame extends JComponent {
 
         player = new Player();
         //  player.changeLocation(player.getX(), player.getY());
-        bulletAK47 = new BulletAK47();
-        bulletAK47.changeLocation(0, 0);
+//bulletAK47 = new BulletAK47();
+      //  bulletAK47.changeLocation(0, 0);
         plate = new Plate();
 
     }
