@@ -1,24 +1,15 @@
 package Entity;
 
-import Engine.PanelGame;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.lang.reflect.AnnotatedArrayType;
 
-import Engine.TickListener;
-import Engine.Ticker;
 import Engine.Window;
-import Math.Vector2D;
-import Math.*;
-import Objects.Weapon.AbstractObject;
-import Utils.Utils;
+import Objects.AbstractObject;
 
 public class Player extends AbstractEntity {
     public static final double PLAYER_SIZE = 64;
     private double gravity = 150;
-  //  private  Vector2D playerVector;
+    //  private  Vector2D playerVector;
     private double dx = 0;
     private double dy = 0;
     private double x, y;
@@ -70,18 +61,11 @@ public class Player extends AbstractEntity {
 
 
         if (isGravity) {
-            if (!((object.y - object.spriteHeight) - (y - spriteWidth + 23) <= 0)) {
 
+            if (!(player_collision.intersects(object.object_collision))) {
                 double _y;
                 _y = y;
                 y = (_y + 20 * 0.1);
-
-
-                //     System.out.println((object.y - object.spriteHeight) - (y - spriteWidth));
-
-
-            } else {
-
             }
 
 
@@ -134,7 +118,7 @@ public class Player extends AbstractEntity {
 
 
     public void update() {
-      //  System.out.println("x pos :"+x+" y pos "+ y);
+        //  System.out.println("x pos :"+x+" y pos "+ y);
         vector2DEntity.changeCoordinates(x, y);
 
       /*  Raycast raycast = new Raycast();

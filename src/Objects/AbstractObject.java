@@ -1,12 +1,14 @@
-package Objects.Weapon;
+package Objects;
 
 import Engine.PanelGame;
+import Math.Vector2D;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 public class AbstractObject {
-    public double x, y;
+    public Vector2D object_vector;
+    public Rectangle object_collision;
     public final float speed = 0.3f;
     public static final double Bullet_SIZE = 42;
     public float angle = 0;
@@ -15,6 +17,8 @@ public class AbstractObject {
     public int spriteWidth;
 
     public AbstractObject(Image image) {
+        object_vector = new Vector2D();
+        object_collision = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
         PanelGame.objectArrayList.add(this);
         spriteHeight = image.getHeight(null);
         spriteWidth = image.getWidth(null);
@@ -22,29 +26,23 @@ public class AbstractObject {
 
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
     public float getAngle() {
         return angle;
     }
 
     public void draw(Graphics2D g2) {
+        object_collision.setBounds((int)object_vector.getX(),(int)object_vector.getY(),spriteWidth,spriteHeight);
         AffineTransform oldTrans = g2.getTransform();
-        g2.translate(x, y);
+        g2.translate(object_vector.getX(), object_vector.getY());
         g2.drawImage(image, 0, 0, null);
 
         g2.setTransform(oldTrans);
 
     }
+
     public void changeLocation(double x, double y) {
-        this.x = x;
-        this.y = y;
+        object_vector.setX(x);
+        object_vector.setY(y);
 
     }
 

@@ -1,12 +1,7 @@
 package Math;
 
 import Engine.PanelGame;
-import Entity.AbstractEntity;
-import Objects.Weapon.AbstractObject;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Objects;
+import Objects.AbstractObject;
 
 public class Raycast {
 
@@ -52,10 +47,10 @@ public class Raycast {
               //  long distance = (long) Math.sqrt(Math.pow(_object.getX() - x, 2) - Math.pow((_object.getY()) - y, 2));
                 //System.out.println("pos x = " + x + "| pos y = "+y+"| distance = "+distance+"| Object x = "+_object.getX()+"| Object y = "+ _object.getY());
                 //System.out.println("\n object name = "+_object.getClass().getName());
-                if (!(Math.sqrt(Math.pow(_object.getX() - x, 2) - Math.pow((_object.getY()) - y, 2)) <= 0)) {
-                    System.out.println("pos x = " + x + "| pos y = "+y+"| Object x = "+_object.getX()+"| Object y = "+ _object.getY()+"| object = "+_object.getClass().getName());
+                if (!(Math.sqrt(Math.pow(_object.angle - x, 2) - Math.pow((_object.angle - y), 2)) <= 0)) {
+                    System.out.println("pos x = " + x + "| pos y = "+y+"| Object x = "+_object.angle+"| Object y = "+ _object.angle+"| object = "+_object.getClass().getName());
                     return _object;
-                    //вычислять вектором от  отчки с помщью MAth.abd(AB), и после столкнговения луча, возвращать его
+                    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ  пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ MAth.abd(AB), пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 
                 }
 

@@ -15,15 +15,17 @@ import static Engine.PanelGame.entityArrayList;
 public class AbstractEntity {
 
     public Vector2D vector2DEntity;
+    public Rectangle player_collision;
     private final Image image_sprites;
     public int spriteHeight;
     public int spriteWidth;
 
     public AbstractEntity(Image imageSprites) {
+        vector2DEntity = new Vector2D();
+        player_collision = new Rectangle((int) vector2DEntity.getX(),(int) vector2DEntity.getY(),spriteWidth,spriteHeight);
         PanelGame.entityArrayList.add(this);
         spriteHeight = imageSprites.getHeight(null);
         spriteWidth = imageSprites.getWidth(null);
-        vector2DEntity = new Vector2D();
         image_sprites = imageSprites;
     }
 
@@ -33,7 +35,7 @@ public class AbstractEntity {
     }
 
     public void draw(Graphics2D g2) {
-
+        player_collision.setBounds((int)vector2DEntity.getX(),(int)vector2DEntity.getY(),spriteWidth,spriteHeight);
         AffineTransform oldTrans = g2.getTransform();
         g2.translate(vector2DEntity.getX(), vector2DEntity.getY());
     //    System.out.println("x pos :"+x+" y pos "+ y+ "translating");

@@ -4,13 +4,11 @@ import Engine.Controls.CustomKeyListener;
 import Entity.AbstractEntity;
 import Entity.Player;
 import Objects.Plate;
-import Objects.Weapon.AbstractObject;
-import Objects.Weapon.BulletAK47;
+import Objects.AbstractObject;
 import Utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -47,7 +45,7 @@ public class PanelGame extends JComponent {
         ticker.addTickListener(new TickListener() {
             @Override
             public void onTick(float deltaTime) {
-                System.out.println(Utils.getMem());
+                //System.out.println(Utils.getMem());
                 drawGame();
                 // player.changeLocation(10,2);
                 plate.changeLocation(0, 500);

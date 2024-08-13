@@ -1,10 +1,9 @@
 package Objects.Weapon;
 
-import Utils.Utils;
+import Objects.AbstractObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 public class BulletAK47 extends AbstractObject {
 
@@ -13,11 +12,6 @@ public class BulletAK47 extends AbstractObject {
     }
 
 
-    public void changeLocation(double x, double y) {
-        this.x = x;
-        this.y = y;
-
-    }
 
     @Override
     public void draw(Graphics2D g2) {
