@@ -2,6 +2,7 @@ package Engine;
 
 import javax.swing.*;
 
+import Engine.Core.TextureLoader;
 import Math.Vector2D;
 
 import java.awt.*;
@@ -18,7 +19,7 @@ public class Window extends JFrame {
         setSize(width, height);
         setVisible(true);
         PanelGame panelGame = new PanelGame();
-        add(panelGame);
+        add(panelGame,BorderLayout.CENTER);
         panelGame.start();
     }
 
@@ -32,7 +33,6 @@ public class Window extends JFrame {
 
     public static void main(String[] args) {
            new Window();
-
 
     }
 }

@@ -1,6 +1,9 @@
 package Math;
 
 
+import Entity.AbstractEntity;
+import Objects.AbstractObject;
+
 import java.util.Vector;
 import java.util.logging.Logger;
 
@@ -22,6 +25,9 @@ public class Vector2D {
         this.x = vector2D.getY();
     }
 
+    public static Vector2D subVector(Vector2D vec1, Vector2D vec2) {
+        return new Vector2D(vec1.getX() - vec2.getX(), vec1.getY() - vec2.getY());
+    }
 
     public Vector2D(double x, double y) {
         this.x = x;
@@ -33,6 +39,18 @@ public class Vector2D {
     public static double getLongVector(double x, double y) {
 
         return Math.sqrt((x * x) + (y * y));
+
+    }
+
+    public static Vector2D getSubWithSpritesVectorEntity(AbstractEntity abstractEntity, AbstractObject object) {
+        Vector2D a = abstractEntity.vector2DEntity;
+        Vector2D b = object.object_vector;
+
+        double x, y;
+        x = ((a.getX() + abstractEntity.spriteWidth) - (b.getX() + object.spriteHeight));
+        y = ((a.getY() - abstractEntity.spriteHeight) - (b.getY() - object.spriteHeight));
+
+        return new Vector2D(x, y);
 
     }
 

@@ -1,36 +1,45 @@
 package Engine.Controls;
 
+import Engine.Key;
 import Entity.Player;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class CustomKeyListener extends KeyAdapter {
-Player player;
+    Player player;
 
-    public CustomKeyListener(Player player){
+    public CustomKeyListener(Player player) {
         this.player = player;
     }
+
     @Override
     public void keyReleased(KeyEvent e) {
-      // current_key = "stop";
+        // current_key = "stop";
     }
+
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        switch (keyCode) {
-            case KeyEvent.VK_W:
-                player.moveUP();
-                break;
-            case KeyEvent.VK_S:
-                player.moveDown();
-                 break;
-            case KeyEvent.VK_A:
-                player.moveLeft();
-                break;
-            case KeyEvent.VK_D:
-                player.moveRight();
-                break;
-            default:
+
+
+        if (keyCode == KeyEvent.VK_W) {
+            player.moveUP();
+        } else if (keyCode == KeyEvent.VK_S) {
+            player.moveDown();
+        } else if (keyCode == KeyEvent.VK_A) {
+            player.moveLeft();
+        } else if (keyCode == KeyEvent.VK_D) {
+            player.moveRight();
+        } else if (keyCode == KeyEvent.VK_W && keyCode == KeyEvent.VK_A) {
+            player.moveUP();
+            player.moveLeft();
+        } else if (keyCode == KeyEvent.VK_W && keyCode == KeyEvent.VK_D) {
+            player.moveDown();
+        }else if(keyCode == KeyEvent.VK_R){
+            player.restart_player();
+            System.out.println("sbros");
         }
+
+
     }
 }

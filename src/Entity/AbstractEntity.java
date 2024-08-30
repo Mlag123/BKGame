@@ -19,10 +19,11 @@ public class AbstractEntity {
     private final Image image_sprites;
     public int spriteHeight;
     public int spriteWidth;
+    private boolean isCollide = true;
 
     public AbstractEntity(Image imageSprites) {
         vector2DEntity = new Vector2D();
-        player_collision = new Rectangle((int) vector2DEntity.getX(),(int) vector2DEntity.getY(),spriteWidth,spriteHeight);
+        player_collision = new Rectangle((int) vector2DEntity.getX(), (int) vector2DEntity.getY(), spriteWidth, spriteHeight);
         PanelGame.entityArrayList.add(this);
         spriteHeight = imageSprites.getHeight(null);
         spriteWidth = imageSprites.getWidth(null);
@@ -35,10 +36,10 @@ public class AbstractEntity {
     }
 
     public void draw(Graphics2D g2) {
-        player_collision.setBounds((int)vector2DEntity.getX(),(int)vector2DEntity.getY(),spriteWidth,spriteHeight);
+        player_collision.setBounds((int) vector2DEntity.getX(), (int) vector2DEntity.getY(), spriteWidth, spriteHeight);
         AffineTransform oldTrans = g2.getTransform();
         g2.translate(vector2DEntity.getX(), vector2DEntity.getY());
-    //    System.out.println("x pos :"+x+" y pos "+ y+ "translating");
+        //    System.out.println("x pos :"+x+" y pos "+ y+ "translating");
         g2.drawImage(image_sprites, 0, 0, null);
         g2.setTransform(oldTrans);
     }
