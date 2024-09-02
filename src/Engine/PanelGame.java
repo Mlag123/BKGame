@@ -42,7 +42,12 @@ public class PanelGame extends JComponent {
 
         initObjectGame();
         initKeyboard();
+new Thread(new Runnable() {
+    @Override
+    public void run() {
 
+    }
+}).start();
 
 
 
@@ -50,8 +55,8 @@ public class PanelGame extends JComponent {
             @Override
             public void onTick(float deltaTime) {
                 //System.out.println(Utils.getMem());
-                player.changeLocation(10, 2);
-                plate.changeLocation(0, 500);
+                player.changeLocation(0, 0);
+                plate.changeLocation(100, 380);
                 drawGame();
                 render();
                 drawBackground();

@@ -72,7 +72,7 @@ public class Player extends AbstractEntity {
         if (isGravity) {
 
 
-            if (isCollide()){
+            if (raycast.isCollide(Direction.down,this)){
 
                 double _y;
                 _y = y;
@@ -152,6 +152,8 @@ public class Player extends AbstractEntity {
 
     public void update() {
         //  System.out.println("x pos :"+x+" y pos "+ y);
+
+    //    System.out.println("X = "+x+" Y = "+y);
         vector2DEntity.changeCoordinates(x, y);
         //   System.out.println(x+" "+y);
 

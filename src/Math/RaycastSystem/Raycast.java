@@ -84,7 +84,7 @@ public class Raycast {
                 double x, y;
                 x = vector.getX();
                 y = vector.getY();
-                if (y >= 0&x>=0) {
+                if (y >= 0|x<=0) {
                     return true;
                 }
 
