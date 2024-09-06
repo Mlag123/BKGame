@@ -9,6 +9,7 @@ import Engine.Window;
 import Math.RaycastSystem.Direction;
 import Math.RaycastSystem.Raycast;
 import Objects.AbstractObject;
+import Utils.Tags;
 
 public class Player extends AbstractEntity {
     public static final double PLAYER_SIZE = 64;
@@ -36,6 +37,7 @@ public class Player extends AbstractEntity {
     public Player() {
         super(player_sprite);
         raycast = new Raycast();
+        setTag(String.valueOf(Tags.player));
 
     }
 
@@ -65,7 +67,7 @@ public class Player extends AbstractEntity {
     public boolean isCollide() {
         for (AbstractObject abstractObject : abstractObjectsList) {
             //       System.out.println(player_collision.intersects(abstractObject.object_collision));
-            if ((player_collision.intersects(abstractObject.object_collision))) {
+            if ((object_collision.intersects(abstractObject.object_collision))) {
                 return true;
             }
         }
@@ -157,7 +159,7 @@ public class Player extends AbstractEntity {
 
         //    System.out.println("X = "+x+" Y = "+y);
 
-        vector2DEntity.changeCoordinates(x, y);
+        object_vector.changeCoordinates(x, y);
         //   System.out.println(x+" "+y);
 
       /*  Raycast raycast = new Raycast();

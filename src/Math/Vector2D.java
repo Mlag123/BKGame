@@ -43,7 +43,7 @@ public class Vector2D {
     }
 
     public static Vector2D getSubWithSpritesVectorEntity(AbstractEntity abstractEntity, AbstractObject object) {
-        Vector2D a = abstractEntity.vector2DEntity;
+        Vector2D a = abstractEntity.object_vector;
         Vector2D b = object.object_vector;
 
         double x, y;

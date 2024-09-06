@@ -6,15 +6,16 @@ import Math.Vector2D;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-public class AbstractObject {
+public abstract class AbstractObject {
     public Vector2D object_vector;
     public Rectangle object_collision;
     public final float speed = 0.3f;
     public static final double Bullet_SIZE = 42;
     public float angle = 0;
-    public final Image image;
+    public Image image;
     public int spriteHeight;
     public int spriteWidth;
+    private String tag;
 
     public AbstractObject(Image image) {
         object_vector = new Vector2D();
@@ -24,6 +25,14 @@ public class AbstractObject {
         spriteWidth = image.getWidth(null);
         this.image = image;
 
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public float getAngle() {
