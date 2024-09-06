@@ -4,8 +4,14 @@ import javax.swing.*;
 
 public class Debuger extends JFrame {
 
-    private boolean isDev = false;
-    public Debuger(){
+    private JFrame frame = new JFrame();
+    private boolean isDev = true;
+    private JPanel panel = new JPanel();
+    private JLabel label = new JLabel();
+
+
+
+    public Debuger() {
         super("Debug Menu");
         onDraw();
 /*
