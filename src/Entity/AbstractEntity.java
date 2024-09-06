@@ -30,6 +30,17 @@ public class AbstractEntity {
         image_sprites = imageSprites;
     }
 
+    public void ShowDebugText(Graphics2D g2d) {
+        Graphics g = (Graphics) g2d;
+        int x, y;
+        x = (int) vector2DEntity.getX();
+        y = (int) vector2DEntity.getY() + spriteHeight + 20;
+
+
+        g.drawString("pX = " + vector2DEntity.getX() + "| pY = " + vector2DEntity.getY(), x, y);
+      //  g2d.drawString("pX = " + vector2DEntity.getX() + "| pY = " + vector2DEntity.getY(), 200,300);
+
+    }
 
     public Vector2D getVector2D() {
         return vector2DEntity;
@@ -42,6 +53,7 @@ public class AbstractEntity {
         //    System.out.println("x pos :"+x+" y pos "+ y+ "translating");
         g2.drawImage(image_sprites, 0, 0, null);
         g2.setTransform(oldTrans);
+
     }
 
     public void changeLocation(double x, double y) {

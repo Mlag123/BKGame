@@ -5,6 +5,7 @@ import Entity.AbstractEntity;
 import Entity.Player;
 import Objects.Plate;
 import Objects.AbstractObject;
+import Objects.Wall;
 import Sound.Sound;
 import Utils.Utils;
 
@@ -26,6 +27,7 @@ public class PanelGame extends JComponent {
     private BufferedImage image;
     private Ticker ticker = new Ticker(20);
     private Plate plate;
+    private Wall wall;
 
 
     public PanelGame() {
@@ -34,6 +36,8 @@ public class PanelGame extends JComponent {
     }
 
     public void start() {
+
+
 
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g2 = image.createGraphics();
@@ -56,7 +60,8 @@ new Thread(new Runnable() {
             public void onTick(float deltaTime) {
                 //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
-                plate.changeLocation(100, 380);
+              //  plate.changeLocation(100, 380);
+                wall.changeLocation(600,200);
                 drawGame();
                 render();
                 drawBackground();
@@ -80,7 +85,9 @@ new Thread(new Runnable() {
         player.update();
         player.gravity();
         player.draw(g2);
-        plate.draw(g2);
+        player.ShowDebugText(g2);
+     //   plate.draw(g2);
+        wall.draw(g2);
         //  bulletAK47.draw(g2);
     }
 
@@ -110,8 +117,8 @@ new Thread(new Runnable() {
         //  player.changeLocation(player.getX(), player.getY());
 //bulletAK47 = new BulletAK47();
         //  bulletAK47.changeLocation(0, 0);
-        plate = new Plate();
-
+     //   plate = new Plate();
+wall = new Wall();
     }
 
 

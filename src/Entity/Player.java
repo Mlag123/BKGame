@@ -27,6 +27,8 @@ public class Player extends AbstractEntity {
     public boolean isGravity = true;
     private boolean speedUP = false;
     private Raycast raycast;
+    private Boolean isCollides;
+    private String text;
     private final static Image player_sprite = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
     private ArrayList<AbstractObject> abstractObjectsList = PanelGame.objectArrayList;
 
@@ -53,6 +55,8 @@ public class Player extends AbstractEntity {
     }
 
 
+
+
     public void restart_player() {
         x = 0;
         y = 0;
@@ -72,17 +76,15 @@ public class Player extends AbstractEntity {
         if (isGravity) {
 
 
-            if (raycast.isCollide(Direction.down,this)){
+            if (raycast.isCollide(Direction.down, this)) {
 
                 double _y;
                 _y = y;
                 y = (_y + 20 * 0.1);
-           //     System.out.println(new Raycast().getObject(Direction.down, x, y));
+                //     System.out.println(new Raycast().getObject(Direction.down, x, y));
             } else {
-                y =y;
+                y = y;
             }
-
-
 
 
         }
@@ -110,7 +112,7 @@ public class Player extends AbstractEntity {
     }
 
     public void moveDown() {
-        if (isCollide()) {
+        if (raycast.isCollide(Direction.down, this)) {
             double _y;
             _y = y;
             y = (_y + 20 * speed);
@@ -153,7 +155,8 @@ public class Player extends AbstractEntity {
     public void update() {
         //  System.out.println("x pos :"+x+" y pos "+ y);
 
-    //    System.out.println("X = "+x+" Y = "+y);
+        //    System.out.println("X = "+x+" Y = "+y);
+
         vector2DEntity.changeCoordinates(x, y);
         //   System.out.println(x+" "+y);
 

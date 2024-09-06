@@ -51,7 +51,7 @@ public class Vector2D {
         y = (b.getY()-object.spriteHeight)-(a.getY()-abstractEntity.spriteHeight)-27;
 
 
-        System.out.println("playerX = "+a.getX()+"| playerY = "+a.getY()+"| x = "+x+"| y = "+y+"| obY = "+b.getY());
+ //      System.out.println("playerX = "+a.getX()+"| playerY = "+a.getY()+"| x = "+x+"| y = "+y+"| obY = "+b.getY()+"| OBJ = "+object.getClass().getName() );
 
         return new Vector2D(x, y);
 

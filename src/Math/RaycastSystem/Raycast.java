@@ -77,19 +77,14 @@ public class Raycast {
 
         } else if (direction == Direction.down) {
             for (AbstractObject _object : PanelGame.objectArrayList) {
-                //  long distance = (long) Math.sqrt(Math.pow(_object.getX() - x, 2) - Math.pow((_object.getY()) - y, 2));
-                //System.out.println("pos x = " + x + "| pos y = "+y+"| distance = "+distance+"| Object x = "+_object.getX()+"| Object y = "+ _object.getY());
-                //System.out.println("\n object name = "+_object.getClass().getName());
                 Vector2D vector = Vector2D.getSubWithSpritesVectorEntity(abEnt, _object);
                 double x, y;
                 x = vector.getX();
                 y = vector.getY();
-                if (y >= 0|x<=0) {
+                if (y >= 0 | x <= 0) {
                     return true;
                 }
-
             }
-
 
         } else if (direction == Direction.left) {
 
