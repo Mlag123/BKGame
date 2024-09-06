@@ -2,10 +2,7 @@ package Math;
 
 
 import Entity.AbstractEntity;
-import Objects.AbstractObject;
-
-import java.util.Vector;
-import java.util.logging.Logger;
+import Math.GameObjects.AbstractObject;
 
 public class Vector2D {
 

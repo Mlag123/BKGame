@@ -8,7 +8,7 @@ import Engine.PanelGame;
 import Engine.Window;
 import Math.RaycastSystem.Direction;
 import Math.RaycastSystem.Raycast;
-import Objects.AbstractObject;
+import Math.GameObjects.AbstractObject;
 import Utils.Tags;
 
 public class Player extends AbstractEntity {

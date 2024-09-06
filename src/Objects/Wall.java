@@ -1,7 +1,8 @@
 package Objects;
 
+import Math.GameObjects.AbstractObject;
+
 import javax.swing.*;
-import java.awt.*;
 
 public class Wall extends AbstractObject {
     public Wall() {

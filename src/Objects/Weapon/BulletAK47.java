@@ -1,6 +1,6 @@
 package Objects.Weapon;
 
-import Objects.AbstractObject;
+import Math.GameObjects.AbstractObject;
 
 import javax.swing.*;
 import java.awt.*;

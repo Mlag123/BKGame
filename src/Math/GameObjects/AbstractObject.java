@@ -1,7 +1,8 @@
-package Objects;
+package Math.GameObjects;
 
 import Engine.PanelGame;
 import Math.Vector2D;
+import Utils.Debuger;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -16,6 +17,8 @@ public abstract class AbstractObject {
     public int spriteHeight;
     public int spriteWidth;
     private String tag;
+    public static Debuger debuger = new Debuger();
+
 
     public AbstractObject(Image image) {
         object_vector = new Vector2D();

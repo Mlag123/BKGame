@@ -5,14 +5,10 @@ import java.awt.geom.AffineTransform;
 
 
 import Engine.PanelGame;
-import Engine.TickListener;
-import Engine.Ticker;
 import Entity.Inventory.Hand;
 import Math.Vector2D;
-import Objects.AbstractObject;
-import Utils.Utils;
-
-import static Engine.PanelGame.entityArrayList;
+import Math.GameObjects.AbstractObject;
+import Utils.Debuger;
 
 public abstract class AbstractEntity extends AbstractObject {
 
@@ -41,7 +37,7 @@ public abstract class AbstractEntity extends AbstractObject {
 
 
         g.drawString("pX = " + object_vector.getX() + "| pY = " + object_vector.getY(), x, y);
-      //  g2d.drawString("pX = " + vector2DEntity.getX() + "| pY = " + vector2DEntity.getY(), 200,300);
+        //  g2d.drawString("pX = " + vector2DEntity.getX() + "| pY = " + vector2DEntity.getY(), 200,300);
 
     }
 
@@ -56,10 +52,14 @@ public abstract class AbstractEntity extends AbstractObject {
         //    System.out.println("x pos :"+x+" y pos "+ y+ "translating");
         g2.drawImage(image, 0, 0, null);
         g2.setTransform(oldTrans);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                debuger.showDebugText("Player "+"plX = " + object_vector.getX() + "| plY = " + object_vector.getY() + "| plW = " + spriteWidth + "| plH = " + spriteHeight);
 
+            }
+        }).start();
     }
-
-
 
 
 }

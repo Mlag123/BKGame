@@ -2,8 +2,7 @@ package Math.RaycastSystem;
 
 import Engine.PanelGame;
 import Entity.AbstractEntity;
-import Entity.Player;
-import Objects.AbstractObject;
+import Math.GameObjects.AbstractObject;
 import Math.Vector2D;
 
 public class Raycast {

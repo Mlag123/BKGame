@@ -1,5 +1,7 @@
 package Objects;
 
+import Math.GameObjects.AbstractObject;
+
 import javax.swing.*;
 
 public class Plate  extends AbstractObject {

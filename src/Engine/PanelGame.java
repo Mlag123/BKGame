@@ -4,10 +4,8 @@ import Engine.Controls.CustomKeyListener;
 import Entity.AbstractEntity;
 import Entity.Player;
 import Objects.Plate;
-import Objects.AbstractObject;
+import Math.GameObjects.AbstractObject;
 import Objects.Wall;
-import Sound.Sound;
-import Utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +36,6 @@ public class PanelGame extends JComponent {
     public void start() {
 
 
-
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -46,13 +43,12 @@ public class PanelGame extends JComponent {
 
         initObjectGame();
         initKeyboard();
-new Thread(new Runnable() {
-    @Override
-    public void run() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-    }
-}).start();
-
+            }
+        }).start();
 
 
         ticker.addTickListener(new TickListener() {
@@ -60,8 +56,8 @@ new Thread(new Runnable() {
             public void onTick(float deltaTime) {
                 //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
-              //  plate.changeLocation(100, 380);
-                wall.changeLocation(600,200);
+                //  plate.changeLocation(100, 380);
+                wall.changeLocation(600, 200);
                 drawGame();
                 render();
                 drawBackground();
@@ -86,7 +82,7 @@ new Thread(new Runnable() {
         player.gravity();
         player.draw(g2);
         player.ShowDebugText(g2);
-     //   plate.draw(g2);
+        //   plate.draw(g2);
         wall.draw(g2);
         //  bulletAK47.draw(g2);
     }
@@ -117,8 +113,8 @@ new Thread(new Runnable() {
         //  player.changeLocation(player.getX(), player.getY());
 //bulletAK47 = new BulletAK47();
         //  bulletAK47.changeLocation(0, 0);
-     //   plate = new Plate();
-wall = new Wall();
+        //   plate = new Plate();
+        wall = new Wall();
     }
 
 

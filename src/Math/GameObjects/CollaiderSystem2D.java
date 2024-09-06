@@ -1,7 +1,5 @@
 package Math.GameObjects;
 
-import Entity.AbstractEntity;
-import Objects.AbstractObject;
 import Math.Vector2D;
 
 public class CollaiderSystem2D {
@@ -9,6 +7,7 @@ public class CollaiderSystem2D {
     private Vector2D collaiderVector;
     private int width;
     private int height;
+    private int dog_H;
 
     public Vector2D getCollaiderVector() {
         return collaiderVector;
@@ -31,6 +30,7 @@ public class CollaiderSystem2D {
         } else {
             throw new GameObjectIsNull("GameObject is null");
         }
+
 
     }
 
