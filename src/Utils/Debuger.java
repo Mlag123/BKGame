@@ -1,9 +1,11 @@
 package Utils;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Debuger extends JFrame {
 
+    private ArrayList<JLabel> arrayListLabels = new ArrayList<>();
     private JFrame frame = new JFrame();
     private boolean isDev = true;
     private JPanel panel = new JPanel();
@@ -34,7 +36,11 @@ public class Debuger extends JFrame {
     }
 
     public void showDebugText(String message) {
+
         label.setText(message);
+
+
+
     }
 
 

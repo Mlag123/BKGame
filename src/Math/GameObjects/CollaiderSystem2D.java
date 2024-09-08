@@ -34,9 +34,13 @@ public class CollaiderSystem2D {
 
     }
 
-/*    public boolean isCollisionEntered(AbstractObject object,CollaiderSystem2D collaider){
+/*    public boolean isCollisionEntered(AbstractObject gameObject1, AbstractObject gameObject2) {
+        Vector2D vectorGameObject = gameObject1.object_vector;
+        Vector2D vectorGameObject2 = gameObject2.object_vector;
+        //CollaiderSystem2D collaiderSystem2D = gameObject1.object_collision;
+        if () {
 
-
+        }
 
 
     }*/
