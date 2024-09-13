@@ -2,10 +2,13 @@ package Entity;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.util.logging.Logger;
 
 
 import Engine.PanelGame;
+import Engine.Window;
 import Entity.Inventory.Hand;
+import Math.RaycastSystem.Direction;
 import Math.Vector2D;
 import Math.GameObjects.AbstractObject;
 import Utils.Debuger;
@@ -55,11 +58,12 @@ public abstract class AbstractEntity extends AbstractObject {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                debuger.showDebugText("Player "+"plX = " + object_vector.getX() + "| plY = " + object_vector.getY() + "| plW = " + spriteWidth + "| plH = " + spriteHeight);
+                debuger.showDebugText("Player " + "plX = " + object_vector.getX() + "| plY = " + object_vector.getY() + "| plW = " + spriteWidth + "| plH = " + spriteHeight);
 
             }
         }).start();
     }
+
 
 
 }

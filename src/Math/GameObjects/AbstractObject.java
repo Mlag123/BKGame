@@ -1,6 +1,8 @@
 package Math.GameObjects;
 
 import Engine.PanelGame;
+import Engine.Window;
+import Math.RaycastSystem.Direction;
 import Math.Vector2D;
 import Utils.Debuger;
 
@@ -43,7 +45,7 @@ public abstract class AbstractObject {
     }
 
     public void draw(Graphics2D g2) {
-        object_collision.setBounds((int)object_vector.getX(),(int)object_vector.getY(),spriteWidth,spriteHeight);
+        object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
         AffineTransform oldTrans = g2.getTransform();
         g2.translate(object_vector.getX(), object_vector.getY());
         g2.drawImage(image, 0, 0, null);
@@ -65,5 +67,32 @@ public abstract class AbstractObject {
             angle = 0;
         }
         this.angle = angle;
+    }
+
+    /**
+     * this function for debugging game
+     *
+     * @param vector2D
+     * @param object
+     * @param direction
+     * @return
+     */
+    public boolean limitWindow(Vector2D vector2D, AbstractObject object, Direction direction) {
+        double x, y, dx, dy;
+        x = vector2D.getX();
+        y = vector2D.getY();
+        dx = (x + object.spriteWidth);
+        dy = (y + object.spriteHeight + 27);
+        switch (direction) {
+            case down:
+                if (dy <= Window.getHeightFrame()) {
+
+                    System.out.println("down | "+this.getClass().getName());
+                    return true;
+                }
+            default:
+                return false;
+        }
+
     }
 }

@@ -18,7 +18,7 @@ public class Player extends AbstractEntity {
     private double dx = 0;
     private double dy = 0;
     private double x, y;
-    private double speed = 0.1;
+    private double speed = 0.4;
     private double maxSpeed = 0.2f;
     private double minSpeed = 0.1f;
     private float angle = 0;
@@ -78,15 +78,20 @@ public class Player extends AbstractEntity {
         if (isGravity) {
 
 
-            if (raycast.isCollide(Direction.down, this)) {
+            if  (limitWindow(this.object_vector,this,Direction.down)){
+                if (raycast.isCollide(Direction.down, this)) {
 
-                double _y;
-                _y = y;
-                y = (_y + 20 * 0.1);
-                //     System.out.println(new Raycast().getObject(Direction.down, x, y));
-            } else {
-                y = y;
+                    double _y;
+                    _y = y;
+                    y = (_y + 20 * 0.1);
+                    //     System.out.println(new Raycast().getObject(Direction.down, x, y));
+                } else {
+                    y = y;
+                }
+
             }
+
+
 
 
         }
@@ -102,7 +107,7 @@ public class Player extends AbstractEntity {
             isJumping = true;
             double _y;
             _y = y;
-            y = (_y - 1500 * speed);
+            y = (_y - 150 * speed);
 
         } else {
             isJumping = false;

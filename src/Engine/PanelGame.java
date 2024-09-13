@@ -6,6 +6,7 @@ import Entity.Player;
 import Objects.Plate;
 import Math.GameObjects.AbstractObject;
 import Objects.Wall;
+import Sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,7 @@ public class PanelGame extends JComponent {
     private Ticker ticker = new Ticker(20);
     private Plate plate;
     private Wall wall;
+    private Sound sound;
 
 
     public PanelGame() {
@@ -46,7 +48,9 @@ public class PanelGame extends JComponent {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
+                sound = new Sound();
+                sound.setFile("./Resources/Sounds/main.wav");
+                sound.play();
             }
         }).start();
 
@@ -56,7 +60,7 @@ public class PanelGame extends JComponent {
             public void onTick(float deltaTime) {
                 //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
-                //  plate.changeLocation(100, 380);
+                 plate.changeLocation(100, 380);
                 wall.changeLocation(600, 200);
                 drawGame();
                 render();
@@ -82,7 +86,7 @@ public class PanelGame extends JComponent {
         player.gravity();
         player.draw(g2);
         player.ShowDebugText(g2);
-        //   plate.draw(g2);
+           plate.draw(g2);
         wall.draw(g2);
         //  bulletAK47.draw(g2);
     }
@@ -113,7 +117,7 @@ public class PanelGame extends JComponent {
         //  player.changeLocation(player.getX(), player.getY());
 //bulletAK47 = new BulletAK47();
         //  bulletAK47.changeLocation(0, 0);
-        //   plate = new Plate();
+           plate = new Plate();
         wall = new Wall();
     }
 
