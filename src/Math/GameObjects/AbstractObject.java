@@ -9,7 +9,7 @@ import Utils.Debuger;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-public abstract class AbstractObject {
+public abstract class AbstractObject implements IHasRender{
     public Vector2D object_vector;
     public Rectangle object_collision;
     public final float speed = 0.3f;
