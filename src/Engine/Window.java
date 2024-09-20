@@ -19,7 +19,7 @@ public class Window extends JFrame {
         setSize(width, height);
         setVisible(true);
         PanelGame panelGame = new PanelGame();
-        add(panelGame,BorderLayout.CENTER);
+        add(panelGame, BorderLayout.CENTER);
         panelGame.start();
     }
 
@@ -32,7 +32,8 @@ public class Window extends JFrame {
     }
 
     public static void main(String[] args) {
-           new Window();
+        new Window();
+
 
     }
 }

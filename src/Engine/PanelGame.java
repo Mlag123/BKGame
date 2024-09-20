@@ -28,6 +28,7 @@ public class PanelGame extends JComponent {
     private Plate plate;
     private Wall wall;
     private Sound sound;
+    private Graphics graphics;
 
 
     public PanelGame() {
@@ -42,6 +43,7 @@ public class PanelGame extends JComponent {
         g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        graphics = getGraphics();
 
         initObjectGame();
         initKeyboard();
@@ -50,7 +52,7 @@ public class PanelGame extends JComponent {
             public void run() {
                 sound = new Sound();
                 sound.setFile("./Resources/Sounds/main.wav");
-                sound.play();
+                    sound.play();
             }
         }).start();
 
@@ -60,10 +62,10 @@ public class PanelGame extends JComponent {
             public void onTick(float deltaTime) {
                 //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
-                 plate.changeLocation(100, 380);
+                plate.changeLocation(100, 380);
                 wall.changeLocation(600, 200);
                 drawGame();
-                render();
+                render(getGraphics());
                 drawBackground();
                 //      System.out.println(player.getVector2D().getX());
 
@@ -73,7 +75,6 @@ public class PanelGame extends JComponent {
         while (start) {
             //   updateDraw();
             ticker.update();
-
             //   System.out.println("Delta-FPS = "+deltaTime+" class:"+PanelGame.class.getName());
 
         }
@@ -86,7 +87,7 @@ public class PanelGame extends JComponent {
         player.gravity();
         player.draw(g2);
         player.ShowDebugText(g2);
-           plate.draw(g2);
+        plate.draw(g2);
         wall.draw(g2);
         //  bulletAK47.draw(g2);
     }
@@ -98,8 +99,8 @@ public class PanelGame extends JComponent {
         g2.fillRect(0, 0, width, height);
     }
 
-    public void render() {
-        Graphics g = getGraphics();
+    public void render(Graphics graphics) {
+        Graphics g = graphics;
         g.drawImage(image, 0, 0, null);
         g.dispose();
     }
@@ -117,7 +118,7 @@ public class PanelGame extends JComponent {
         //  player.changeLocation(player.getX(), player.getY());
 //bulletAK47 = new BulletAK47();
         //  bulletAK47.changeLocation(0, 0);
-           plate = new Plate();
+        plate = new Plate();
         wall = new Wall();
     }
 
