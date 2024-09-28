@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import Engine.PanelGame;
 import Engine.Window;
 import Entity.Inventory.Hand;
+import Entity.Inventory.Inventory;
 import Math.RaycastSystem.Direction;
 import Math.Vector2D;
 import Math.GameObjects.AbstractObject;
@@ -18,6 +19,7 @@ public abstract class AbstractEntity extends AbstractObject {
     private int health;
     private int armor;
     private Hand hand;
+    private Inventory inventory;
 
     private boolean isCollide = true;
 

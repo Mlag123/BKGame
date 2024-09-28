@@ -10,12 +10,17 @@ public class Vector2D {
 
     public Vector2D() {
 
+
+
+
+
     }
 
     public void changeCoordinates(double x, double y) {
         this.x = x;
         this.y = y;
     }
+
 
     public void changeCoordinates(Vector2D vector2D) {
         this.y = vector2D.getX();
