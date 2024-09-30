@@ -3,6 +3,7 @@ package Engine;
 import javax.swing.*;
 
 import Engine.Core.TextureLoader;
+import Math.GameObjects.GameObjectIsNull;
 import Math.Vector2D;
 
 import java.awt.*;
@@ -12,7 +13,7 @@ public class Window extends JFrame {
     private static int width = 1280;
     private static int height = 720;
 
-    public Window() {
+    public Window() throws GameObjectIsNull {
         setTitle("BoyKisser Game");
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -31,7 +32,7 @@ public class Window extends JFrame {
         return height;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws GameObjectIsNull {
         new Window();
 
 

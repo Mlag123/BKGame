@@ -5,11 +5,12 @@ import Engine.Window;
 import Math.RaycastSystem.Direction;
 import Math.Vector2D;
 import Utils.Debuger;
+import Utils.Tags;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-public abstract class AbstractObject implements IHasRender{
+public abstract class AbstractObject implements IHasRender {
     public Vector2D object_vector;
     public Rectangle object_collision;
     public final float speed = 0.3f;
@@ -18,11 +19,14 @@ public abstract class AbstractObject implements IHasRender{
     public Image image;
     public int spriteHeight;
     public int spriteWidth;
-    private String tag;
+    private Tags tag;
+
+    private boolean isVisible = true; //default true!
     public static Debuger debuger = new Debuger();
 
 
-    public AbstractObject(Image image) {
+    public AbstractObject(Image image, Tags tags) {
+        this.tag = tags;
         object_vector = new Vector2D();
         object_collision = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
         PanelGame.objectArrayList.add(this);
@@ -32,8 +36,16 @@ public abstract class AbstractObject implements IHasRender{
 
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setVisible(boolean visible) {
+        this.isVisible = visible;
+    }
+
+    public boolean getVisibleState() {
+        return isVisible;
+    }
+
+    public Tags getTag() {
+        return tag;
     }
 
     public Image getImage() {
@@ -45,12 +57,14 @@ public abstract class AbstractObject implements IHasRender{
     }
 
     public void draw(Graphics2D g2) {
-        object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
-        AffineTransform oldTrans = g2.getTransform();
-        g2.translate(object_vector.getX(), object_vector.getY());
-        g2.drawImage(image, 0, 0, null);
+        if (getVisibleState()) {
+            object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
+            AffineTransform oldTrans = g2.getTransform();
+            g2.translate(object_vector.getX(), object_vector.getY());
+            g2.drawImage(image, 0, 0, null);
 
-        g2.setTransform(oldTrans);
+            g2.setTransform(oldTrans);
+        }
 
     }
 
@@ -87,7 +101,7 @@ public abstract class AbstractObject implements IHasRender{
             case down:
                 if (dy <= Window.getHeightFrame()) {
 
-                    System.out.println("down | "+this.getClass().getName());
+               //     System.out.println("down | " + this.getClass().getName());
                     return true;
                 }
             default:

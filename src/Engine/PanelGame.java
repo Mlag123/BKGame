@@ -3,6 +3,7 @@ package Engine;
 import Engine.Controls.CustomKeyListener;
 import Entity.AbstractEntity;
 import Entity.Player;
+import Math.GameObjects.GameObjectIsNull;
 import Objects.Plate;
 import Math.GameObjects.AbstractObject;
 import Objects.Wall;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 
 public class PanelGame extends JComponent {
     public static ArrayList<AbstractObject> objectArrayList = new ArrayList<>();
-    public static ArrayList<AbstractEntity> entityArrayList = new ArrayList<>();
     private Key key;
     //private BulletAK47 bulletAK47;
     private int width = Window.getWidthFrame();
@@ -36,7 +36,7 @@ public class PanelGame extends JComponent {
 
     }
 
-    public void start() {
+    public void start() throws GameObjectIsNull {
 
 
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -52,7 +52,7 @@ public class PanelGame extends JComponent {
             public void run() {
                 sound = new Sound();
                 sound.setFile("./Resources/Sounds/main.wav");
-                  sound.play();
+                //  sound.play();
             }
         }).start();
 
@@ -62,8 +62,9 @@ public class PanelGame extends JComponent {
             public void onTick(float deltaTime) {
                 //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
-                plate.changeLocation(100, 380);
+                plate.changeLocation(30, 340);
                 wall.changeLocation(600, 200);
+                player.setVisible(true);
                 drawGame();
                 render(getGraphics());
                 drawBackground();
@@ -112,7 +113,7 @@ public class PanelGame extends JComponent {
 
     }
 
-    public void initObjectGame() {
+    public void initObjectGame() throws GameObjectIsNull {
 
         player = new Player();
         //  player.changeLocation(player.getX(), player.getY());

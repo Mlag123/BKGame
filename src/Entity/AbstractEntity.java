@@ -13,6 +13,7 @@ import Math.RaycastSystem.Direction;
 import Math.Vector2D;
 import Math.GameObjects.AbstractObject;
 import Utils.Debuger;
+import Utils.Tags;
 
 public abstract class AbstractEntity extends AbstractObject {
 
@@ -24,11 +25,10 @@ public abstract class AbstractEntity extends AbstractObject {
     private boolean isCollide = true;
 
 
-    public AbstractEntity(Image imageSprites) {
-        super(imageSprites);
+    public AbstractEntity(Image imageSprites, Tags tags) {
+        super(imageSprites,tags);
         object_vector = new Vector2D();
         object_collision = new Rectangle((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
-        PanelGame.entityArrayList.add(this);
         spriteHeight = imageSprites.getHeight(null);
         spriteWidth = imageSprites.getWidth(null);
         image = imageSprites;
@@ -45,6 +45,7 @@ public abstract class AbstractEntity extends AbstractObject {
         //  g2d.drawString("pX = " + vector2DEntity.getX() + "| pY = " + vector2DEntity.getY(), 200,300);
 
     }
+
 
     public Vector2D getVector2D() {
         return object_vector;

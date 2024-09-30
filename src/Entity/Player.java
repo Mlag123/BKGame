@@ -1,11 +1,14 @@
 package Entity;
 
 import javax.swing.*;
+import javax.swing.text.html.HTML;
 import java.awt.*;
 import java.util.ArrayList;
 
 import Engine.PanelGame;
 import Engine.Window;
+import Math.GameObjects.CollaiderSystem2D;
+import Math.GameObjects.GameObjectIsNull;
 import Math.RaycastSystem.Direction;
 import Math.RaycastSystem.Raycast;
 import Math.GameObjects.AbstractObject;
@@ -30,14 +33,14 @@ public class Player extends AbstractEntity {
     private Raycast raycast;
     private Boolean isCollides;
     private String text;
+    private CollaiderSystem2D collaiderSystem2D = new CollaiderSystem2D(this);
     private final static Image player_sprite = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
     private ArrayList<AbstractObject> abstractObjectsList = PanelGame.objectArrayList;
 
 
-    public Player() {
-        super(player_sprite);
+    public Player() throws GameObjectIsNull {
+        super(player_sprite, Tags.player);
         raycast = new Raycast();
-        setTag(String.valueOf(Tags.player));
 
     }
 
@@ -79,15 +82,22 @@ public class Player extends AbstractEntity {
 
 
             if  (limitWindow(this.object_vector,this,Direction.down)){
-                if (raycast.isCollide(Direction.down, this)) {
 
-                    double _y;
-                    _y = y;
-                    y = (_y + 20 * 0.1);
-                    //     System.out.println(new Raycast().getObject(Direction.down, x, y));
-                } else {
-                    y = y;
-                }
+
+
+              try {
+                  if (!collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.plate)) {
+
+                      double _y;
+                      _y = y;
+                      y = (_y + 20 * 0.1);
+                      //     System.out.println(new Raycast().getObject(Direction.down, x, y));
+                  } else {
+                      y = y;
+                  }
+              } catch (GameObjectIsNull e) {
+                  throw new RuntimeException(e);
+              }
 
             }
 
@@ -164,7 +174,9 @@ public class Player extends AbstractEntity {
 
         //    System.out.println("X = "+x+" Y = "+y);
 
-        object_vector.changeCoordinates(x, y);
+     if (getVisibleState()){
+         object_vector.changeCoordinates(x, y);
+     }
         //   System.out.println(x+" "+y);
 
       /*  Raycast raycast = new Raycast();

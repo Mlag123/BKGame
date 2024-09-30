@@ -1,6 +1,7 @@
 package Objects.Weapon;
 
 import Math.GameObjects.AbstractObject;
+import Utils.Tags;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.awt.*;
 public class BulletAK47 extends AbstractObject {
 
     public BulletAK47() {
-        super(new ImageIcon("./Resources/Sprites/Weapon/bulletAK.png").getImage());
+        super(new ImageIcon("./Resources/Sprites/Weapon/bulletAK.png").getImage(), Tags.object);
     }
 
 
