@@ -2,6 +2,7 @@ package Engine.Controls;
 
 import Engine.Key;
 import Entity.Player;
+import Math.GameObjects.GameObjectIsNull;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -25,7 +26,11 @@ public class CustomKeyListener extends KeyAdapter {
         if (keyCode == KeyEvent.VK_W) {
             player.moveUP();
         } else if (keyCode == KeyEvent.VK_S) {
-            player.moveDown();
+            try {
+                player.moveDown();
+            } catch (GameObjectIsNull ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (keyCode == KeyEvent.VK_A) {
             player.moveLeft();
         } else if (keyCode == KeyEvent.VK_D) {
@@ -34,7 +39,11 @@ public class CustomKeyListener extends KeyAdapter {
             player.moveUP();
             player.moveLeft();
         } else if (keyCode == KeyEvent.VK_W && keyCode == KeyEvent.VK_D) {
-            player.moveDown();
+            try {
+                player.moveDown();
+            } catch (GameObjectIsNull ex) {
+                throw new RuntimeException(ex);
+            }
         }else if(keyCode == KeyEvent.VK_R){
             player.restart_player();
             System.out.println("sbros");

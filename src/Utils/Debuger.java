@@ -37,7 +37,7 @@ public class Debuger extends JFrame {
 
     public void showDebugText(String message) {
 
-        label.setText(message);
+        label.setText(message +" "+Utils.getMem());
 
 
 

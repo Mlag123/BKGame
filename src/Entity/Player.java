@@ -9,6 +9,7 @@ import Engine.PanelGame;
 import Engine.Window;
 import Math.GameObjects.CollaiderSystem2D;
 import Math.GameObjects.GameObjectIsNull;
+import Math.GameObjects.Physics;
 import Math.RaycastSystem.Direction;
 import Math.RaycastSystem.Raycast;
 import Math.GameObjects.AbstractObject;
@@ -16,12 +17,13 @@ import Utils.Tags;
 
 public class Player extends AbstractEntity {
     public static final double PLAYER_SIZE = 64;
+    private Physics physics = new Physics();
     private double gravity = 150;
     //  private  Vector2D playerVector;
     private double dx = 0;
     private double dy = 0;
     private double x, y;
-    private double speed = 0.4;
+    private double speed = 0.5;
     private double maxSpeed = 0.2f;
     private double minSpeed = 0.1f;
     private float angle = 0;
@@ -88,9 +90,10 @@ public class Player extends AbstractEntity {
               try {
                   if (!collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.plate)) {
 
+
                       double _y;
                       _y = y;
-                      y = (_y + 20 * 0.1);
+                      y = (_y + 20 * 0.2);
                       //     System.out.println(new Raycast().getObject(Direction.down, x, y));
                   } else {
                       y = y;
@@ -128,8 +131,8 @@ public class Player extends AbstractEntity {
 
     }
 
-    public void moveDown() {
-        if (raycast.isCollide(Direction.down, this)) {
+    public void moveDown() throws GameObjectIsNull {
+        if (!collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.plate)) {
             double _y;
             _y = y;
             y = (_y + 20 * speed);
@@ -143,7 +146,7 @@ public class Player extends AbstractEntity {
 
         if (isCollide()) {
             if (!((Window.getWidthFrame() - (x)) >= Window.getWidthFrame())) {
-                x = (x - 120 * speed);
+                x = (x - 5 * speed)*4;
             }
 
         }
@@ -152,7 +155,7 @@ public class Player extends AbstractEntity {
     public void moveRight() {
         if (!(0 >= Window.getWidthFrame() - (x + spriteWidth + 23))) {
             if (isCollide()) {
-                x = (x + 120 * speed);
+                x = (x + 5 * speed*4);
 
             }
         }
