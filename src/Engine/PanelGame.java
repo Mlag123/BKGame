@@ -4,17 +4,20 @@ import Engine.Controls.CustomKeyListener;
 import Entity.AbstractEntity;
 import Entity.Player;
 import Math.GameObjects.GameObjectIsNull;
+import Math.RaycastSystem.Direction;
+import Math.RaycastSystem.Raycast;
 import Objects.Plate;
 import Math.GameObjects.AbstractObject;
 import Objects.Wall;
 import Sound.Sound;
+import Utils.Tags;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class PanelGame extends JComponent {
+public class PanelGame extends  JComponent {
     public static ArrayList<AbstractObject> objectArrayList = new ArrayList<>();
     private Key key;
     //private BulletAK47 bulletAK47;
@@ -29,6 +32,8 @@ public class PanelGame extends JComponent {
     private Wall wall;
     private Sound sound;
     private Graphics graphics;
+
+    Raycast r = new Raycast();
 
 
     public PanelGame() {
@@ -65,6 +70,7 @@ public class PanelGame extends JComponent {
                 plate.changeLocation(30, 340);
                 wall.changeLocation(250, 300);
 
+                //          System.out.println(r.getTagObject(Direction.right, Tags.wall));
 
                 player.setVisible(true);
                 drawGame();
@@ -73,6 +79,7 @@ public class PanelGame extends JComponent {
                 //      System.out.println(player.getVector2D().getX());
 
             }
+
         });
 
         while (start) {
@@ -85,6 +92,9 @@ public class PanelGame extends JComponent {
 
     }
 
+
+
+
     public void drawGame() {
         player.update();
         player.gravity();
@@ -92,6 +102,8 @@ public class PanelGame extends JComponent {
         player.ShowDebugText(g2);
         plate.draw(g2);
         wall.draw(g2);
+
+
         //  bulletAK47.draw(g2);
     }
 

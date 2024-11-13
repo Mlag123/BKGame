@@ -68,6 +68,7 @@ public abstract class AbstractObject implements IHasRender {
 
     }
 
+    
     public void changeLocation(double x, double y) {
         object_vector.setX(x);
         object_vector.setY(y);

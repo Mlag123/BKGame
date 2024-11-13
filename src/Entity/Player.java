@@ -156,8 +156,8 @@ public class Player extends AbstractEntity {
         if (!(0 >= Window.getWidthFrame() - (x + spriteWidth + 23))) {
             if (isCollide()) {
                 if(collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.wall)){
-                    x = x +5*speed;
                 }
+                x = x +5*speed;
 
             }
         }

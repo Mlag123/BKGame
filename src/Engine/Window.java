@@ -15,13 +15,29 @@ public class Window extends JFrame {
 
     public Window() throws GameObjectIsNull {
         setTitle("BoyKisser Game");
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(width, height);
         setVisible(true);
         PanelGame panelGame = new PanelGame();
+       // setLayout(new BorderLayout());
         add(panelGame, BorderLayout.CENTER);
+        try {
+            Thread.sleep(125);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        pack();
         panelGame.start();
+        /*
+        frame.setLayout(new BorderLayout());
+frame.add(cc, BorderLayout.CENTER);
+         */
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(width,height);
     }
 
     public static int getWidthFrame() {
