@@ -20,7 +20,7 @@ public class PanelGame extends JComponent {
     //private BulletAK47 bulletAK47;
     private int width = Window.getWidthFrame();
     private int height = Window.getHeightFrame();
-    private Player player;
+    public Player player;
     private Graphics2D g2;
     private boolean start = true;
     private BufferedImage image;
@@ -52,7 +52,7 @@ public class PanelGame extends JComponent {
             public void run() {
                 sound = new Sound();
                 sound.setFile("./Resources/Sounds/main.wav");
-                  sound.play();
+               //   sound.play();
             }
         }).start();
 
@@ -63,7 +63,9 @@ public class PanelGame extends JComponent {
                 //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
                 plate.changeLocation(30, 340);
-                wall.changeLocation(600, 200);
+                wall.changeLocation(250, 300);
+
+
                 player.setVisible(true);
                 drawGame();
                 render(getGraphics());

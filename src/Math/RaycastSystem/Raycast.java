@@ -4,6 +4,7 @@ import Engine.PanelGame;
 import Entity.AbstractEntity;
 import Math.GameObjects.AbstractObject;
 import Math.Vector2D;
+import Utils.Tags;
 
 public class Raycast {
 
@@ -37,7 +38,7 @@ public class Raycast {
 
     }
 
-    public AbstractObject getObject(Direction direction, double x, double y) { //fixme
+    public Tags getObject(Direction direction, double x, double y) { //fixme
         //   ArrayList<AbstractObject> abstractObjects = PanelGame.objectArrayList;
         //    Rectangle r = new Rectangle(10,10,101,0);
 
@@ -51,7 +52,7 @@ public class Raycast {
                 //System.out.println("\n object name = "+_object.getClass().getName());
                 if (Vector2D.subVector(_object.object_vector, new Vector2D(x, y)).getY() <= 0) {
                     //      System.out.println("я сосиска"+" "+_object.getClass().getName()+" "+Vector2D.subVector(_object.object_vector, new Vector2D(x, y)).getY());
-                    return _object;
+                    return _object.getTag();
                 }
 
             }

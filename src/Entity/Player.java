@@ -23,7 +23,7 @@ public class Player extends AbstractEntity {
     private double dx = 0;
     private double dy = 0;
     private double x, y;
-    private double speed = 0.5;
+    private double speed = 1.2;
     private double maxSpeed = 0.2f;
     private double minSpeed = 0.1f;
     private float angle = 0;
@@ -146,16 +146,18 @@ public class Player extends AbstractEntity {
 
         if (isCollide()) {
             if (!((Window.getWidthFrame() - (x)) >= Window.getWidthFrame())) {
-                x = (x - 5 * speed)*4;
+                x = x -5*speed;
             }
 
         }
     }
 
-    public void moveRight() {
+    public void moveRight() throws GameObjectIsNull {
         if (!(0 >= Window.getWidthFrame() - (x + spriteWidth + 23))) {
             if (isCollide()) {
-                x = (x + 5 * speed*4);
+                if(collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.wall)){
+                    x = x +5*speed;
+                }
 
             }
         }

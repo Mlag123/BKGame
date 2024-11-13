@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="LogDebugersLib" level="project" />
+    <orderEntry type="library" name="luajava-3.4.0" level="project" />
   </component>
 </module>

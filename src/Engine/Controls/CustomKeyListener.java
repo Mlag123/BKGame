@@ -34,7 +34,11 @@ public class CustomKeyListener extends KeyAdapter {
         } else if (keyCode == KeyEvent.VK_A) {
             player.moveLeft();
         } else if (keyCode == KeyEvent.VK_D) {
-            player.moveRight();
+            try {
+                player.moveRight();
+            } catch (GameObjectIsNull ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (keyCode == KeyEvent.VK_W && keyCode == KeyEvent.VK_A) {
             player.moveUP();
             player.moveLeft();
