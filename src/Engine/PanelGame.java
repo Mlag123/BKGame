@@ -20,7 +20,7 @@ public class PanelGame extends JComponent {
     //private BulletAK47 bulletAK47;
     private int width = Window.getWidthFrame();
     private int height = Window.getHeightFrame();
-    public Player player;
+    public static Player player;
     private Graphics2D g2;
     private boolean start = true;
     private BufferedImage image;
