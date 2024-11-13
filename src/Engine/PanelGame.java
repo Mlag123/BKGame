@@ -57,7 +57,7 @@ public class PanelGame extends  JComponent {
             public void run() {
                 sound = new Sound();
                 sound.setFile("./Resources/Sounds/main.wav");
-               //   sound.play();
+                //sound.play();
             }
         }).start();
 

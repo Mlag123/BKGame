@@ -5,6 +5,7 @@ import javax.swing.text.html.HTML;
 import java.awt.*;
 import java.util.ArrayList;
 
+import Engine.Core.TextureLoader;
 import Engine.PanelGame;
 import Engine.Window;
 import Math.GameObjects.CollaiderSystem2D;
@@ -41,7 +42,7 @@ public class Player extends AbstractEntity {
 
 
     public Player() throws GameObjectIsNull {
-        super(player_sprite, Tags.player);
+        super(TextureLoader.player_Sprite, Tags.player);
         raycast = new Raycast();
 
     }
@@ -83,7 +84,7 @@ public class Player extends AbstractEntity {
         if (isGravity) {
 
 
-            if  (limitWindow(this.object_vector,this,Direction.down)){
+            if  (limitWindow(this.object_vector,this,Direction.down,true)){
 
 
 

@@ -11,7 +11,6 @@ public class CollaiderSystem2D {
     private Vector2D collaiderVector;
     private int width;
     private int height;
-    private int dog_H;
 
     public Vector2D getCollaiderVector() {
         return collaiderVector;
@@ -37,7 +36,7 @@ public class CollaiderSystem2D {
 
 
     }
-
+    //наудивлене частично коим боком это как то работает
     public boolean isCollisionEntered(AbstractObject gameObject1, ArrayList<AbstractObject> arrayList, Tags tags) throws GameObjectIsNull {
         AbstractObject gameObject2 = null;
         for (AbstractObject obj : arrayList) {
@@ -65,7 +64,6 @@ public class CollaiderSystem2D {
 
         if (gameObject1.object_vector.getX()+gameObject1.spriteWidth<= (xWCenter+ (gameObject2.spriteWidth/2))){
             if (_y >= 0) {
-                System.out.println(xWCenter);
                 return true;
             } else {
                 return false;

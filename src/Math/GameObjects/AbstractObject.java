@@ -20,7 +20,6 @@ public abstract class AbstractObject implements IHasRender {
     public int spriteHeight;
     public int spriteWidth;
     private Tags tag;
-
     private boolean isVisible = true; //default true!
     public static Debuger debuger = new Debuger();
 
@@ -68,7 +67,7 @@ public abstract class AbstractObject implements IHasRender {
 
     }
 
-    
+
     public void changeLocation(double x, double y) {
         object_vector.setX(x);
         object_vector.setY(y);
@@ -92,22 +91,25 @@ public abstract class AbstractObject implements IHasRender {
      * @param direction
      * @return
      */
-    public boolean limitWindow(Vector2D vector2D, AbstractObject object, Direction direction) {
+    public boolean limitWindow(Vector2D vector2D, AbstractObject object, Direction direction, boolean isLimit) {
         double x, y, dx, dy;
         x = vector2D.getX();
         y = vector2D.getY();
         dx = (x + object.spriteWidth);
         dy = (y + object.spriteHeight + 27);
-        switch (direction) {
-            case down:
-                if (dy <= Window.getHeightFrame()) {
+        if (isLimit) {
+            switch (direction) {
+                case down:
+                    if (dy <= Window.getHeightFrame()) {
 
-               //     System.out.println("down | " + this.getClass().getName());
-                    return true;
-                }
-            default:
-                return false;
+                        //     System.out.println("down | " + this.getClass().getName());
+                        return true;
+                    }
+                default:
+                    return false;
+            }
         }
 
+        return false;
     }
 }
