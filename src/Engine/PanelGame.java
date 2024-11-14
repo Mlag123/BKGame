@@ -58,7 +58,7 @@ public class PanelGame extends JComponent {
             public void run() {
                 sound = new Sound();
                 sound.setFile("./Resources/Sounds/main.wav");
-                //sound.play();
+                sound.play();
             }
         }).start();
 
@@ -124,6 +124,8 @@ public class PanelGame extends JComponent {
         requestFocus();
         addKeyListener(new CustomKeyListener(player));*/
         customKeyListener = new CustomKeyListener(player);
+        Thread thread_keyboard = new Thread(customKeyListener);
+        thread_keyboard.start();
 
     }
 
