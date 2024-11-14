@@ -3,7 +3,7 @@ package Utils;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Debuger extends JFrame {
+public class Debuger implements Runnable {
 
     private ArrayList<JLabel> arrayListLabels = new ArrayList<>();
     private JFrame frame = new JFrame();
@@ -12,11 +12,12 @@ public class Debuger extends JFrame {
     private JLabel label = new JLabel();
 
 
-
     public Debuger() {
-        super("Debug Menu");
-        onDraw();
-/*
+        Thread debugThread = new Thread(this);
+        debugThread.start();
+
+
+        /*
         if (isDev){
         }else {
             setVisible(false);
@@ -28,20 +29,24 @@ public class Debuger extends JFrame {
     }
 
     public void onDraw() {
-        setVisible(true);
-        setSize(500, 300);
+        frame.setVisible(true);
+        frame.setTitle("Debug Menu");
+        frame.setSize(500, 300);
         panel.add(label);
-        setContentPane(panel);
+        frame.setContentPane(panel);
 
     }
 
     public void showDebugText(String message) {
 
-        label.setText(message +" "+Utils.getMem());
-
+        label.setText(message + " " + Utils.getMem());
 
 
     }
 
 
+    @Override
+    public void run() {
+        onDraw();
+    }
 }

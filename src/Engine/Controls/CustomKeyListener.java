@@ -1,58 +1,51 @@
 package Engine.Controls;
 
 import Engine.Key;
+import Engine.PanelGame;
 import Entity.Player;
 import Math.GameObjects.GameObjectIsNull;
 
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class CustomKeyListener extends KeyAdapter {
+public class CustomKeyListener {
     Player player;
+
 
     public CustomKeyListener(Player player) {
         this.player = player;
+
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent ke) {
+                synchronized (IsKeyPressed.class) {
+                    switch (ke.getID()) {
+                        case KeyEvent.KEY_PRESSED:
+                            if (ke.getKeyCode() == KeyEvent.VK_W) {
+                                    player.moveUP();
+
+                            }
+                        case KeyEvent.KEY_RELEASED:
+                            if (ke.getKeyCode() == KeyEvent.VK_W) {
+
+                            }
+                    }
+                }
+
+                return false;
+            }
+        });
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // current_key = "stop";
-    }
+    public class IsKeyPressed {
+        private static volatile boolean wPressed = false;
 
-    public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-
-
-        if (keyCode == KeyEvent.VK_W) {
-            player.moveUP();
-        } else if (keyCode == KeyEvent.VK_S) {
-            try {
-                player.moveDown();
-            } catch (GameObjectIsNull ex) {
-                throw new RuntimeException(ex);
+        public static boolean isWPressed() {
+            synchronized (IsKeyPressed.class) {
+                return wPressed;
             }
-        } else if (keyCode == KeyEvent.VK_A) {
-            player.moveLeft();
-        } else if (keyCode == KeyEvent.VK_D) {
-            try {
-                player.moveRight();
-            } catch (GameObjectIsNull ex) {
-                throw new RuntimeException(ex);
-            }
-        } else if (keyCode == KeyEvent.VK_W && keyCode == KeyEvent.VK_A) {
-            player.moveUP();
-            player.moveLeft();
-        } else if (keyCode == KeyEvent.VK_W && keyCode == KeyEvent.VK_D) {
-            try {
-                player.moveDown();
-            } catch (GameObjectIsNull ex) {
-                throw new RuntimeException(ex);
-            }
-        }else if(keyCode == KeyEvent.VK_R){
-            player.restart_player();
-            System.out.println("sbros");
         }
-
-
     }
 }

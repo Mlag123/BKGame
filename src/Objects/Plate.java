@@ -3,9 +3,7 @@ package Objects;
 import Math.GameObjects.AbstractObject;
 import Utils.Tags;
 
-import javax.swing.*;
-
-import static Engine.Core.TextureLoader.plate_Sprite;
+import static Engine.Core.ResourceLoader.plate_Sprite;
 
 public class Plate  extends AbstractObject {
    // private final  static ImageIcon image;

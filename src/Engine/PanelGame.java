@@ -14,10 +14,11 @@ import Utils.Tags;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class PanelGame extends  JComponent {
+public class PanelGame extends JComponent {
     public static ArrayList<AbstractObject> objectArrayList = new ArrayList<>();
     private Key key;
     //private BulletAK47 bulletAK47;
@@ -32,12 +33,12 @@ public class PanelGame extends  JComponent {
     private Wall wall;
     private Sound sound;
     private Graphics graphics;
+    private CustomKeyListener customKeyListener;
 
     Raycast r = new Raycast();
 
 
     public PanelGame() {
-
 
     }
 
@@ -85,14 +86,12 @@ public class PanelGame extends  JComponent {
         while (start) {
             //   updateDraw();
             ticker.update();
-            //   System.out.println("Delta-FPS = "+deltaTime+" class:"+PanelGame.class.getName());
+
 
         }
 
 
     }
-
-
 
 
     public void drawGame() {
@@ -121,9 +120,10 @@ public class PanelGame extends  JComponent {
     }
 
     public void initKeyboard() {
-        key = new Key();
+    /*  key = new Key(); fixme
         requestFocus();
-        addKeyListener(new CustomKeyListener(player));
+        addKeyListener(new CustomKeyListener(player));*/
+        customKeyListener = new CustomKeyListener(player);
 
     }
 

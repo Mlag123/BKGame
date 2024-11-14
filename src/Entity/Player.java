@@ -1,11 +1,10 @@
 package Entity;
 
 import javax.swing.*;
-import javax.swing.text.html.HTML;
 import java.awt.*;
 import java.util.ArrayList;
 
-import Engine.Core.TextureLoader;
+import Engine.Core.ResourceLoader;
 import Engine.PanelGame;
 import Engine.Window;
 import Math.GameObjects.CollaiderSystem2D;
@@ -42,7 +41,7 @@ public class Player extends AbstractEntity {
 
 
     public Player() throws GameObjectIsNull {
-        super(TextureLoader.player_Sprite, Tags.player);
+        super(ResourceLoader.player_Sprite, Tags.player);
         raycast = new Raycast();
 
     }

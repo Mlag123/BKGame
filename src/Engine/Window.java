@@ -2,9 +2,7 @@ package Engine;
 
 import javax.swing.*;
 
-import Engine.Core.TextureLoader;
 import Math.GameObjects.GameObjectIsNull;
-import Math.Vector2D;
 
 import java.awt.*;
 
