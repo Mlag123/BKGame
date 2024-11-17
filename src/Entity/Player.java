@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import Engine.Core.ResourceLoader;
 import Engine.PanelGame;
 import Engine.Window;
-import Math.GameObjects.CollaiderSystem2D;
+import Math.CollaiderSystem2D;
 import Math.GameObjects.GameObjectIsNull;
 import Math.Physics;
 import Math.RaycastSystem.Direction;
@@ -125,7 +125,9 @@ public class Player extends AbstractEntity {
         } else {
             isJumping = false;
 
-            y = 0;
+            y=y-y;
+
+          //  y = 0;
         }
 
 

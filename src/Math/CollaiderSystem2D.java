@@ -1,9 +1,9 @@
-package Math.GameObjects;
+package Math;
 
-import Math.Vector2D;
+import Math.GameObjects.AbstractObject;
+import Math.GameObjects.GameObjectIsNull;
 import Utils.Tags;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CollaiderSystem2D {
