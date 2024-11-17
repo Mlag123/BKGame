@@ -18,7 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class PanelGame extends JComponent {
+public class PanelGame extends JComponent  implements Runnable{
     public static ArrayList<AbstractObject> objectArrayList = new ArrayList<>();
     private Key key;
     //private BulletAK47 bulletAK47;
@@ -35,7 +35,6 @@ public class PanelGame extends JComponent {
     private Graphics graphics;
     private CustomKeyListener customKeyListener;
 
-    Raycast r = new Raycast();
 
 
     public PanelGame() {
@@ -140,4 +139,12 @@ public class PanelGame extends JComponent {
     }
 
 
+    @Override
+    public void run() {
+        try {
+            start();
+        } catch (GameObjectIsNull e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

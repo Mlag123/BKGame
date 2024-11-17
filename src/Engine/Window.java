@@ -10,10 +10,11 @@ public class Window extends JFrame {
 
     private static int width = 1280;
     private static int height = 720;
+    private String title = "BKEngine";
 
     public Window() throws GameObjectIsNull {
-        setTitle("BoyKisser Game");
-        setResizable(true);
+        setTitle(title);
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(width, height);
         setVisible(true);
@@ -26,7 +27,11 @@ public class Window extends JFrame {
             throw new RuntimeException(e);
         }
         pack();
-        panelGame.start();
+        Thread game_thread = new Thread(panelGame);
+        game_thread.start();
+
+
+
         /*
         frame.setLayout(new BorderLayout());
 frame.add(cc, BorderLayout.CENTER);

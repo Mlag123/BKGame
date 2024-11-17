@@ -1,8 +1,4 @@
-package Math.GameObjects;
-
-import Math.Vector2D;
-
-import java.awt.*;
+package Math;
 
 public class Physics {
 

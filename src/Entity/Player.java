@@ -9,7 +9,7 @@ import Engine.PanelGame;
 import Engine.Window;
 import Math.GameObjects.CollaiderSystem2D;
 import Math.GameObjects.GameObjectIsNull;
-import Math.GameObjects.Physics;
+import Math.Physics;
 import Math.RaycastSystem.Direction;
 import Math.RaycastSystem.Raycast;
 import Math.GameObjects.AbstractObject;

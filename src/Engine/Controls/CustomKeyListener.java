@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class CustomKeyListener implements  Runnable{
-    Player player;
+   private Player player;
 
 
     public CustomKeyListener(Player player) {

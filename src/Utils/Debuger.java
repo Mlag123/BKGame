@@ -1,5 +1,7 @@
 package Utils;
 
+import Engine.Window;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -31,7 +33,7 @@ public class Debuger implements Runnable {
     public void onDraw() {
         frame.setVisible(true);
         frame.setTitle("Debug Menu");
-        frame.setSize(500, 300);
+        frame.setSize(Window.getWidthFrame()/2, Window.getHeightFrame()/4);
         panel.add(label);
         frame.setContentPane(panel);
 
