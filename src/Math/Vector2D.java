@@ -70,7 +70,7 @@ public class Vector2D {
 
     public double getLongVector() {
         double x = getX(), y = getY();
-        return Math.sqrt((x * x) + (y * y));
+        return Math.abs( Math.sqrt((x * x) + (y * y)));
 
     }
 
