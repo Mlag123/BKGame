@@ -3,6 +3,7 @@ package Engine;
 import Engine.Controls.CustomKeyListener;
 import Entity.AbstractEntity;
 import Entity.Player;
+import LuaLoader.ModLoader.LoadModFolder;
 import Math.GameObjects.GameObjectIsNull;
 import Math.RaycastSystem.Direction;
 import Math.RaycastSystem.Raycast;
@@ -11,6 +12,7 @@ import Math.GameObjects.AbstractObject;
 import Objects.Wall;
 import Sound.Sound;
 import Utils.Tags;
+import logging.Logging;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +20,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class PanelGame extends JComponent  implements Runnable{
+public class PanelGame extends JComponent implements Runnable {
     public static ArrayList<AbstractObject> objectArrayList = new ArrayList<>();
     private Key key;
     //private BulletAK47 bulletAK47;
@@ -34,11 +36,14 @@ public class PanelGame extends JComponent  implements Runnable{
     private Sound sound;
     private Graphics graphics;
     private CustomKeyListener customKeyListener;
-
+    private LoadModFolder loadModFolder;
 
 
     public PanelGame() {
-
+        Logging.log("Loading mod");
+        Logging.log("Created Example mod");
+        loadModFolder = new LoadModFolder();
+        Logging.log("Mods load.");
     }
 
     public void start() throws GameObjectIsNull {

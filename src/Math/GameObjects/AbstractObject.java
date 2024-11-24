@@ -55,7 +55,7 @@ public abstract class AbstractObject implements IHasRender {
         return angle;
     }
 
-    public void draw(Graphics2D g2) {
+    public  void draw(Graphics2D g2) {
         if (getVisibleState()) {
             object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
             AffineTransform oldTrans = g2.getTransform();
