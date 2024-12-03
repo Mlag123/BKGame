@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import Engine.Core.ResourceLoader;
 import Engine.PanelGame;
+import Engine.SceneSystem.TextManager;
 import Engine.Window;
 import Math.CollaiderSystem2D;
 import Math.GameObjects.GameObjectIsNull;
@@ -19,6 +20,7 @@ public class Player extends AbstractEntity {
     public static final double PLAYER_SIZE = 64;
     private Physics physics = new Physics();
     private double gravity = 150;
+   // private TextManager textManager = new TextManager();
     //  private  Vector2D playerVector;
     private double dx = 0;
     private double dy = 0;
@@ -184,6 +186,7 @@ public class Player extends AbstractEntity {
      if (getVisibleState()){
          object_vector.changeCoordinates(x, y);
      }
+
         //   System.out.println(x+" "+y);
 
       /*  Raycast raycast = new Raycast();

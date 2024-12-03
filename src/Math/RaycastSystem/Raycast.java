@@ -2,12 +2,9 @@ package Math.RaycastSystem;
 
 import Engine.PanelGame;
 import Entity.AbstractEntity;
-import Entity.Player;
 import Math.GameObjects.AbstractObject;
 import Math.Vector2D;
 import Utils.Tags;
-
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class Raycast {

@@ -1,17 +1,20 @@
 package Engine;
 
 import Engine.Controls.CustomKeyListener;
+import Engine.SceneSystem.TextManager;
 import Entity.AbstractEntity;
 import Entity.Player;
 import LuaLoader.ModLoader.LoadModFolder;
 import Math.GameObjects.GameObjectIsNull;
 import Math.RaycastSystem.Direction;
 import Math.RaycastSystem.Raycast;
+import Math.Vector2D;
 import Objects.Plate;
 import Math.GameObjects.AbstractObject;
 import Objects.Wall;
 import Sound.Sound;
 import Utils.Tags;
+import Utils.Utils;
 import logging.Logging;
 
 import javax.swing.*;
@@ -27,7 +30,7 @@ public class PanelGame extends JComponent implements Runnable {
     private int width = Window.getWidthFrame();
     private int height = Window.getHeightFrame();
     public static Player player;
-    private Graphics2D g2;
+    public static Graphics2D g2;
     private boolean start = true;
     private BufferedImage image;
     private Ticker ticker = new Ticker(20);
@@ -37,6 +40,7 @@ public class PanelGame extends JComponent implements Runnable {
     private Graphics graphics;
     private CustomKeyListener customKeyListener;
     private LoadModFolder loadModFolder;
+    private TextManager textManager;
 
 
     public PanelGame() {
@@ -44,6 +48,7 @@ public class PanelGame extends JComponent implements Runnable {
         Logging.log("Created Example mod");
         loadModFolder = new LoadModFolder();
         Logging.log("Mods load.");
+
     }
 
     public void start() throws GameObjectIsNull {
@@ -55,6 +60,8 @@ public class PanelGame extends JComponent implements Runnable {
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         graphics = getGraphics();
 
+
+
         initObjectGame();
         initKeyboard();
         new Thread(new Runnable() {
@@ -62,7 +69,7 @@ public class PanelGame extends JComponent implements Runnable {
             public void run() {
                 sound = new Sound();
                 sound.setFile("./Resources/Sounds/main.wav");
-                sound.play();
+             //   sound.play();
             }
         }).start();
 
@@ -80,6 +87,7 @@ public class PanelGame extends JComponent implements Runnable {
                 player.setVisible(true);
                 drawGame();
                 render(getGraphics());
+
                 drawBackground();
                 //      System.out.println(player.getVector2D().getX());
 
@@ -101,10 +109,11 @@ public class PanelGame extends JComponent implements Runnable {
     public void drawGame() {
         player.update();
         player.gravity();
-        player.draw(g2);
+        player.draw();
         player.ShowDebugText(g2);
-        plate.draw(g2);
-        wall.draw(g2);
+        plate.draw();
+        wall.draw();
+        textManager.draw(Utils.getMem(),new Vector2D(10,50),Color.red,0,0);
 
 
         //  bulletAK47.draw(g2);
@@ -141,6 +150,8 @@ public class PanelGame extends JComponent implements Runnable {
         //  bulletAK47.changeLocation(0, 0);
         plate = new Plate();
         wall = new Wall();
+        textManager = new TextManager();
+
     }
 
 

@@ -21,6 +21,8 @@ public abstract class AbstractEntity extends AbstractObject {
     private int armor;
     private Hand hand;
     private Inventory inventory;
+    private Graphics2D g2 = this.getGraphics2D();
+
 
     private boolean isCollide = true;
 
@@ -51,12 +53,14 @@ public abstract class AbstractEntity extends AbstractObject {
         return object_vector;
     }
 
-    public void draw(Graphics2D g2) {
+    public void draw() {
         object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
         AffineTransform oldTrans = g2.getTransform();
         g2.translate(object_vector.getX(), object_vector.getY());
+
         //    System.out.println("x pos :"+x+" y pos "+ y+ "translating");
         g2.drawImage(image, 0, 0, null);
+        //  g2.drawString("Player " + "plX = " + object_vector.getX() + "| plY = " + object_vector.getY() + "| plW = " + spriteWidth + "| plH = " + spriteHeight,20,0);
         g2.setTransform(oldTrans);
         new Thread(new Runnable() {
             @Override
