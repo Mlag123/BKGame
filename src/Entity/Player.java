@@ -6,10 +6,9 @@ import java.util.ArrayList;
 
 import Engine.Core.ResourceLoader;
 import Engine.PanelGame;
-import Engine.SceneSystem.TextManager;
 import Engine.Window;
 import Math.CollaiderSystem2D;
-import Math.GameObjects.GameObjectIsNull;
+import Utils.Exceptions.GameObjectIsNull;
 import Math.Physics;
 import Math.RaycastSystem.Direction;
 import Math.RaycastSystem.Raycast;

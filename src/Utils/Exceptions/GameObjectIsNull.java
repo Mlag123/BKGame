@@ -1,4 +1,4 @@
-package Math.GameObjects;
+package Utils.Exceptions;
 
 public class GameObjectIsNull extends Exception {
 

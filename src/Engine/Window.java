@@ -2,7 +2,7 @@ package Engine;
 
 import javax.swing.*;
 
-import Math.GameObjects.GameObjectIsNull;
+import Utils.Exceptions.GameObjectIsNull;
 
 import java.awt.*;
 

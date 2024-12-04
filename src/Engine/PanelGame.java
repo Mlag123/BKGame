@@ -2,24 +2,19 @@ package Engine;
 
 import Engine.Controls.CustomKeyListener;
 import Engine.SceneSystem.TextManager;
-import Entity.AbstractEntity;
 import Entity.Player;
 import LuaLoader.ModLoader.LoadModFolder;
-import Math.GameObjects.GameObjectIsNull;
-import Math.RaycastSystem.Direction;
-import Math.RaycastSystem.Raycast;
+import Utils.Exceptions.GameObjectIsNull;
 import Math.Vector2D;
 import Objects.Plate;
 import Math.GameObjects.AbstractObject;
 import Objects.Wall;
 import Sound.Sound;
-import Utils.Tags;
 import Utils.Utils;
 import logging.Logging;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package Math;
 
 import Math.GameObjects.AbstractObject;
-import Math.GameObjects.GameObjectIsNull;
+import Utils.Exceptions.GameObjectIsNull;
 import Utils.Tags;
 
 import java.util.ArrayList;

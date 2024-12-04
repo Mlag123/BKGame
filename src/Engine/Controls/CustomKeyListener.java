@@ -1,14 +1,10 @@
 package Engine.Controls;
 
-import Engine.Key;
-import Engine.PanelGame;
 import Entity.Player;
-import Math.GameObjects.GameObjectIsNull;
+import Utils.Exceptions.GameObjectIsNull;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class CustomKeyListener implements  Runnable{
    private Player player;
