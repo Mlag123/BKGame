@@ -74,7 +74,7 @@ public class PanelGame extends JComponent implements Runnable {
             public void onTick(float deltaTime) {
                 //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
-                plate.changeLocation(30, 340);
+                plate.changeLocation(30, 420);
                 wall.changeLocation(250, 300);
 
                 //          System.out.println(r.getTagObject(Direction.right, Tags.wall));

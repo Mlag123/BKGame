@@ -47,13 +47,9 @@ public class Vector2D {
     public static Vector2D getSubWithSpritesVectorEntity(AbstractEntity abstractEntity, AbstractObject object) {
         Vector2D a = abstractEntity.object_vector;
         Vector2D b = object.object_vector;
-
         double x, y;
         x = ((b.getX()+object.spriteWidth)-(a.getX()+abstractEntity.spriteWidth));
         y = (b.getY()-object.spriteHeight)-(a.getY()-abstractEntity.spriteHeight)-27;
-
-
- //      System.out.println("playerX = "+a.getX()+"| playerY = "+a.getY()+"| x = "+x+"| y = "+y+"| obY = "+b.getY()+"| OBJ = "+object.getClass().getName() );
 
         return new Vector2D(x, y);
 

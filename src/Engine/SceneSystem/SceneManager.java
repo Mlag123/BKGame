@@ -38,6 +38,12 @@ public class SceneManager implements IScene {
     public void create() {
 
     }
+    public void showScene(){
+
+    }
+    public void hideScene(){
+
+    }
 
     @Override
     public void destroy() {
