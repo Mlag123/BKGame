@@ -1,18 +1,19 @@
 package Engine;
 
 import Engine.Controls.CustomKeyListener;
-import Engine.SceneSystem.TextManager;
+import Objects.TextManager.Texts.SimpleText;
+import Objects.TextManager.TextManager;
 import Entity.Player;
 import LuaLoader.ModLoader.LoadModFolder;
 import Utils.Exceptions.GameObjectIsNull;
-import Math.Vector2D;
 import Objects.Plate;
 import Math.GameObjects.AbstractObject;
 import Objects.Wall;
 import Sound.Sound;
 import Utils.Utils;
 import logging.Logging;
-
+import Utils.Tags;
+import Math.Vector2D;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,6 +37,9 @@ public class PanelGame extends JComponent implements Runnable {
     private CustomKeyListener customKeyListener;
     private LoadModFolder loadModFolder;
     private TextManager textManager;
+    private SimpleText simpleText; //this a debug text;
+    private SimpleText textPlayerCoordinate;
+    //  private TextManager fps_monitor;
 
 
     public PanelGame() {
@@ -47,14 +51,13 @@ public class PanelGame extends JComponent implements Runnable {
     }
 
     public void start() throws GameObjectIsNull {
-
+        //FIXME TEST CODE!!
 
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         graphics = getGraphics();
-
 
 
         initObjectGame();
@@ -64,7 +67,7 @@ public class PanelGame extends JComponent implements Runnable {
             public void run() {
                 sound = new Sound();
                 sound.setFile("./Resources/Sounds/main.wav");
-             //   sound.play();
+                //   sound.play();
             }
         }).start();
 
@@ -76,15 +79,14 @@ public class PanelGame extends JComponent implements Runnable {
                 player.changeLocation(0, 0);
                 plate.changeLocation(30, 420);
                 wall.changeLocation(250, 300);
-
-                //          System.out.println(r.getTagObject(Direction.right, Tags.wall));
-
                 player.setVisible(true);
+
                 drawGame();
+
+
                 render(getGraphics());
 
                 drawBackground();
-                //      System.out.println(player.getVector2D().getX());
 
             }
 
@@ -108,10 +110,10 @@ public class PanelGame extends JComponent implements Runnable {
         player.ShowDebugText(g2);
         plate.draw();
         wall.draw();
-        textManager.draw(Utils.getMem(),new Vector2D(10,50),Color.red,0,0);
-
-
-        //  bulletAK47.draw(g2);
+        simpleText.setText(Utils.getMem());
+        String pl = "Player X :" + player.object_vector.x + "| Player Y :" + player.object_vector.y;
+        textPlayerCoordinate.setText(new StringBuffer(pl));
+        textManager.drawText();
     }
 
 
@@ -146,6 +148,11 @@ public class PanelGame extends JComponent implements Runnable {
         plate = new Plate();
         wall = new Wall();
         textManager = new TextManager();
+        simpleText = new SimpleText(Color.red, Tags.text, new Vector2D(20,50),new Vector2D(0,0));
+        textPlayerCoordinate = new SimpleText(Color.ORANGE, Tags.text, new Vector2D(20,120),new Vector2D(0,0));
+        textManager.addSimpleText(simpleText);
+        textManager.addSimpleText(textPlayerCoordinate);
+
 
     }
 
@@ -157,5 +164,9 @@ public class PanelGame extends JComponent implements Runnable {
         } catch (GameObjectIsNull e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Graphics2D getG2(){
+        return g2;
     }
 }

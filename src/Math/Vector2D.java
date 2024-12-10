@@ -5,7 +5,7 @@ import Entity.AbstractEntity;
 import Math.GameObjects.AbstractObject;
 
 public class Vector2D {
-
+    public static Vector2D vectorZero = new Vector2D(0,0);
     public double x, y;
 
     public Vector2D() {

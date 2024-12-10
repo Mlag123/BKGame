@@ -9,6 +9,9 @@ public class Ticker {
     private int tickRate;
 
     private Set<TickListener> tickListeners = new HashSet<>();
+    public long getLastTick(){
+        return lastTick;
+    }
 
     public Ticker(int tickRate) {
         this.tickRate = tickRate;
@@ -28,6 +31,10 @@ public class Ticker {
 
     public int getTickRate() {
         return tickRate;
+    }
+
+    public long getNextTick() {
+        return nextTick;
     }
 
     public void reset() {

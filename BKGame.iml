@@ -11,5 +11,6 @@
     <orderEntry type="library" name="LogDebugersLib" level="project" />
     <orderEntry type="library" name="luajava-3.4.0" level="project" />
     <orderEntry type="library" name="LogDebugersLib" level="project" />
+    <orderEntry type="library" name="gson-2.11.0" level="project" />
   </component>
 </module>

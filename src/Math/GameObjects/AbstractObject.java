@@ -36,6 +36,14 @@ public abstract class AbstractObject implements IHasRender {
 
     }
 
+    public AbstractObject(Tags tags) {
+        this.tag = tags;
+        object_vector = new Vector2D();
+        object_collision = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
+        PanelGame.objectArrayList.add(this);
+
+    }
+
     public void setVisible(boolean visible) {
         this.isVisible = visible;
     }
@@ -47,7 +55,8 @@ public abstract class AbstractObject implements IHasRender {
     public Tags getTag() {
         return tag;
     }
-    public Graphics2D getGraphics2D(){
+
+    public Graphics2D getGraphics2D() {
         return g2;
     }
 
@@ -59,7 +68,7 @@ public abstract class AbstractObject implements IHasRender {
         return angle;
     }
 
-    public  void draw() {
+    public void draw() {
         if (getVisibleState()) {
             object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
             AffineTransform oldTrans = g2.getTransform();
