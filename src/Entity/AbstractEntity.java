@@ -62,13 +62,13 @@ public abstract class AbstractEntity extends AbstractObject {
         g2.drawImage(image, 0, 0, null);
         //  g2.drawString("Player " + "plX = " + object_vector.getX() + "| plY = " + object_vector.getY() + "| plW = " + spriteWidth + "| plH = " + spriteHeight,20,0);
         g2.setTransform(oldTrans);
-        new Thread(new Runnable() {
+      /*  new Thread(new Runnable() {
             @Override
             public void run() {
-                debuger.showDebugText("Player " + "plX = " + object_vector.getX() + "| plY = " + object_vector.getY() + "| plW = " + spriteWidth + "| plH = " + spriteHeight);
+                //debuger.showDebugText("Player " + "plX = " + object_vector.getX() + "| plY = " + object_vector.getY() + "| plW = " + spriteWidth + "| plH = " + spriteHeight);
 
             }
-        }).start();
+        }).start();*/
     }
 
 

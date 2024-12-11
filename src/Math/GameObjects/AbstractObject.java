@@ -22,7 +22,7 @@ public abstract class AbstractObject implements IHasRender {
     public int spriteWidth;
     private Tags tag;
     private boolean isVisible = true; //default true!
-    public static Debuger debuger = new Debuger();
+
 
 
     public AbstractObject(Image image, Tags tags) {

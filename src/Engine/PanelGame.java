@@ -67,7 +67,7 @@ public class PanelGame extends JComponent implements Runnable {
             public void run() {
                 sound = new Sound();
                 sound.setFile("./Resources/Sounds/main.wav");
-                //   sound.play();
+                //sound.play();
             }
         }).start();
 
@@ -148,10 +148,11 @@ public class PanelGame extends JComponent implements Runnable {
         plate = new Plate();
         wall = new Wall();
         textManager = new TextManager();
-        simpleText = new SimpleText(Color.red, Tags.text, new Vector2D(20,50),new Vector2D(0,0));
-        textPlayerCoordinate = new SimpleText(Color.ORANGE, Tags.text, new Vector2D(20,120),new Vector2D(0,0));
+        simpleText = new SimpleText(Color.red, Tags.debug, new Vector2D(20,50),new Vector2D(0,0));
+        textPlayerCoordinate = new SimpleText(Color.ORANGE, Tags.debugPlayer, new Vector2D(20,120),new Vector2D(0,0));
         textManager.addSimpleText(simpleText);
         textManager.addSimpleText(textPlayerCoordinate);
+        textManager.removeSimpleText(simpleText);
 
 
     }
