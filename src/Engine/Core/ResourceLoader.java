@@ -19,5 +19,5 @@ public class ResourceLoader {
         Image _image = new ImageIcon(getImagePath(pathSprite)).getImage();
         return _image;
     }
-
+    public static String testMusic = "./Resources/Sounds/main.wav";
 }

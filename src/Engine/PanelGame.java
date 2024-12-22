@@ -1,6 +1,9 @@
 package Engine;
 
 import Engine.Controls.CustomKeyListener;
+import Engine.Core.ResourceLoader;
+import Engine.SceneSystem.SceneManager;
+import Objects.Scenes.DefaultScene;
 import Objects.TextManager.Texts.SimpleText;
 import Objects.TextManager.TextManager;
 import Entity.Player;
@@ -14,6 +17,7 @@ import Utils.Utils;
 import logging.Logging;
 import Utils.Tags;
 import Math.Vector2D;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -39,6 +43,8 @@ public class PanelGame extends JComponent implements Runnable {
     private TextManager textManager;
     private SimpleText simpleText; //this a debug text;
     private SimpleText textPlayerCoordinate;
+    private SceneManager sceneManager = new SceneManager();
+
     //  private TextManager fps_monitor;
 
 
@@ -52,7 +58,7 @@ public class PanelGame extends JComponent implements Runnable {
 
     public void start() throws GameObjectIsNull {
         //FIXME TEST CODE!!
-
+        sceneManager.addScene(new DefaultScene(Tags.defaultScene));
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -66,8 +72,8 @@ public class PanelGame extends JComponent implements Runnable {
             @Override
             public void run() {
                 sound = new Sound();
-                sound.setFile("./Resources/Sounds/main.wav");
-                //sound.play();
+                sound.setFile(ResourceLoader.testMusic);
+                //   sound.play();
             }
         }).start();
 
@@ -75,7 +81,7 @@ public class PanelGame extends JComponent implements Runnable {
         ticker.addTickListener(new TickListener() {
             @Override
             public void onTick(float deltaTime) {
-                //System.out.println(Utils.getMem());
+   /*             //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
                 plate.changeLocation(30, 420);
                 wall.changeLocation(250, 300);
@@ -85,8 +91,8 @@ public class PanelGame extends JComponent implements Runnable {
 
 
                 render(getGraphics());
-
-                drawBackground();
+*/
+                //drawBackground();
 
             }
 
@@ -148,8 +154,8 @@ public class PanelGame extends JComponent implements Runnable {
         plate = new Plate();
         wall = new Wall();
         textManager = new TextManager();
-        simpleText = new SimpleText(Color.red, Tags.debug, new Vector2D(20,50),new Vector2D(0,0));
-        textPlayerCoordinate = new SimpleText(Color.ORANGE, Tags.debugPlayer, new Vector2D(20,120),new Vector2D(0,0));
+        simpleText = new SimpleText(Color.red, Tags.debug, new Vector2D(20, 50), new Vector2D(0, 0));
+        textPlayerCoordinate = new SimpleText(Color.ORANGE, Tags.debugPlayer, new Vector2D(20, 120), new Vector2D(0, 0));
         textManager.addSimpleText(simpleText);
         textManager.addSimpleText(textPlayerCoordinate);
         textManager.removeSimpleText(simpleText);
@@ -167,7 +173,7 @@ public class PanelGame extends JComponent implements Runnable {
         }
     }
 
-    public static Graphics2D getG2(){
+    public static Graphics2D getG2() {
         return g2;
     }
 }

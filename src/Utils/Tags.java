@@ -1,7 +1,8 @@
 package Utils;
 
 public enum Tags {
-    player("Player"), enemy("Enemy"), item("Item"), object("Object"),plate("Plate"),wall("Wall"),debug("Debug"),debugPlayer("DebugPlayer");
+    player("Player"), enemy("Enemy"), item("Item"), object("Object"),plate("Plate"),wall("Wall"),debug("Debug"),debugPlayer("DebugPlayer")
+    ,defaultScene("DefaultScene");
 
     private String tags;
 
