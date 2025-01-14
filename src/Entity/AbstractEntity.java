@@ -21,14 +21,15 @@ public abstract class AbstractEntity extends AbstractObject {
     private int armor;
     private Hand hand;
     private Inventory inventory;
-    private Graphics2D g2 = this.getGraphics2D();
+    private Graphics2D g2 = null;
 
 
     private boolean isCollide = true;
 
 
-    public AbstractEntity(Image imageSprites, Tags tags) {
-        super(imageSprites,tags);
+    public AbstractEntity(Image imageSprites, Tags tags,Graphics2D g2) {
+        super(imageSprites,tags,g2);
+        this.g2 = g2;
         object_vector = new Vector2D();
         object_collision = new Rectangle((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
         spriteHeight = imageSprites.getHeight(null);
@@ -54,21 +55,15 @@ public abstract class AbstractEntity extends AbstractObject {
     }
 
     public void draw() {
-        object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
-        AffineTransform oldTrans = g2.getTransform();
-        g2.translate(object_vector.getX(), object_vector.getY());
+        if(g2 !=  null){
+            object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
+            AffineTransform oldTrans = g2.getTransform();
+            g2.translate(object_vector.getX(), object_vector.getY());
+            g2.drawImage(image, 0, 0, null);
+            g2.setTransform(oldTrans);
 
-        //    System.out.println("x pos :"+x+" y pos "+ y+ "translating");
-        g2.drawImage(image, 0, 0, null);
-        //  g2.drawString("Player " + "plX = " + object_vector.getX() + "| plY = " + object_vector.getY() + "| plW = " + spriteWidth + "| plH = " + spriteHeight,20,0);
-        g2.setTransform(oldTrans);
-      /*  new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //debuger.showDebugText("Player " + "plX = " + object_vector.getX() + "| plY = " + object_vector.getY() + "| plW = " + spriteWidth + "| plH = " + spriteHeight);
+        }
 
-            }
-        }).start();*/
     }
 
 

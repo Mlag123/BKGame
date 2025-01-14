@@ -15,14 +15,15 @@ public abstract class AbstractScene {
     private Tags tags;
     private Vector2D default_coordinate;
     private Vector2D coordinate_for_;
-    private Graphics2D g2;
+    private Graphics2D g2 = PanelGame.g2;
 
     public AbstractScene(Tags tags) throws GameObjectIsNull {
         default_coordinate = new Vector2D(0, 0);
         this.tags = tags;
-        if (g2 != null) {
+        if (g2 == null) {
             g2 = PanelGame.g2;
         } else {
+
             throw new GameObjectIsNull(this.getClass().getName() + " Graphics2D can not be null");
         }
     }
@@ -37,7 +38,7 @@ public abstract class AbstractScene {
     }
 
     public void drawBackground(Color color) {
-
+        g2 = PanelGame.g2;
         g2.setColor(color);
         g2.fillRect(0, 0, Window.getWidthFrame(), Window.getHeightFrame());
     }

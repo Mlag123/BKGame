@@ -1,5 +1,6 @@
 package Objects;
 
+import Engine.PanelGame;
 import Math.GameObjects.AbstractObject;
 import Utils.Tags;
 
@@ -11,7 +12,7 @@ public class Plate  extends AbstractObject {
         private String tag;
 
     public Plate() {
-        super(plate_Sprite, Tags.plate);
+        super(plate_Sprite, Tags.plate, PanelGame.g2);
 
     }
 

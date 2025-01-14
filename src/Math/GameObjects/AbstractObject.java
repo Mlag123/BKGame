@@ -13,7 +13,7 @@ import java.awt.geom.AffineTransform;
 public abstract class AbstractObject implements IHasRender {
     public Vector2D object_vector;
     public Rectangle object_collision;
-    private Graphics2D g2 = PanelGame.g2;
+    private Graphics2D g2 = null;
     public final float speed = 0.3f;
     public static final double Bullet_SIZE = 42;
     public float angle = 0;
@@ -25,7 +25,8 @@ public abstract class AbstractObject implements IHasRender {
 
 
 
-    public AbstractObject(Image image, Tags tags) {
+    public AbstractObject(Image image, Tags tags,Graphics2D g2) {
+        this.g2 = g2;
         this.tag = tags;
         object_vector = new Vector2D();
         object_collision = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
@@ -70,12 +71,14 @@ public abstract class AbstractObject implements IHasRender {
 
     public void draw() {
         if (getVisibleState()) {
-            object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
-            AffineTransform oldTrans = g2.getTransform();
-            g2.translate(object_vector.getX(), object_vector.getY());
-            g2.drawImage(image, 0, 0, null);
+           if(g2 !=null){
+               object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
+               AffineTransform oldTrans = g2.getTransform();
+               g2.translate(object_vector.getX(), object_vector.getY());
+               g2.drawImage(image, 0, 0, null);
 
-            g2.setTransform(oldTrans);
+               g2.setTransform(oldTrans);
+           }
         }
 
     }

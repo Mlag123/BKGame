@@ -2,6 +2,7 @@ package Engine;
 
 import Engine.Controls.CustomKeyListener;
 import Engine.Core.ResourceLoader;
+import Engine.SceneSystem.AbstractScene;
 import Engine.SceneSystem.SceneManager;
 import Objects.Scenes.DefaultScene;
 import Objects.TextManager.Texts.SimpleText;
@@ -13,10 +14,12 @@ import Objects.Plate;
 import Math.GameObjects.AbstractObject;
 import Objects.Wall;
 import Sound.Sound;
+import Utils.Exceptions.SceneIsNotFound;
 import Utils.Utils;
 import logging.Logging;
 import Utils.Tags;
 import Math.Vector2D;
+import Utils.Debuger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +46,7 @@ public class PanelGame extends JComponent implements Runnable {
     private TextManager textManager;
     private SimpleText simpleText; //this a debug text;
     private SimpleText textPlayerCoordinate;
-    private SceneManager sceneManager = new SceneManager();
+    private SceneManager sceneManager;
 
     //  private TextManager fps_monitor;
 
@@ -58,16 +61,27 @@ public class PanelGame extends JComponent implements Runnable {
 
     public void start() throws GameObjectIsNull {
         //FIXME TEST CODE!!
-        sceneManager.addScene(new DefaultScene(Tags.defaultScene));
-        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+
+/*        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics = getGraphics();
+        graphics = getGraphics();*/
 
+        sceneManager = new SceneManager();
 
-        initObjectGame();
+        sceneManager.addScene(new DefaultScene(Tags.defaultScene));
+
         initKeyboard();
+        try {
+            sceneManager.renderScene(Tags.defaultScene);
+        } catch (SceneIsNotFound e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -93,6 +107,8 @@ public class PanelGame extends JComponent implements Runnable {
                 render(getGraphics());
 */
                 //drawBackground();
+
+//                render(getGraphics());
 
             }
 

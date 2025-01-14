@@ -26,6 +26,7 @@ public class CustomKeyListener implements  Runnable{
                         case KeyEvent.KEY_PRESSED:
                             if (ke.getKeyCode() == KeyEvent.VK_W) {
                                 player.moveUP();
+                                System.out.printf("w");
 
                             }else if(ke.getKeyCode() == KeyEvent.VK_S){
                                 try {

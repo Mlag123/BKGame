@@ -42,7 +42,7 @@ public class Player extends AbstractEntity {
 
 
     public Player() throws GameObjectIsNull {
-        super(ResourceLoader.player_Sprite, Tags.player);
+        super(ResourceLoader.player_Sprite, Tags.player,PanelGame.g2);
         raycast = new Raycast();
 
     }
@@ -68,6 +68,8 @@ public class Player extends AbstractEntity {
     public void restart_player() {
         x = 0;
         y = 0;
+
+      
     }
 
     public boolean isCollide() {
