@@ -3,16 +3,23 @@ package Engine;
 import javax.swing.*;
 
 import Utils.Exceptions.GameObjectIsNull;
-
+import Math.Vector2D;
 import java.awt.*;
 
 public class Window extends JFrame {
+
+
+
+
+
 
     private static int width = 1280;
     private static int height = 720;
     private String title = "BKEngine";
 
     public Window() throws GameObjectIsNull {
+
+
         setTitle(title);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

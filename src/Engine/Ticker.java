@@ -8,6 +8,8 @@ public class Ticker {
     private long nextTick;
     private int tickRate;
 
+
+    //FIXME this bad code. Is incorrect working.
     private Set<TickListener> tickListeners = new HashSet<>();
     public long getLastTick(){
         return lastTick;

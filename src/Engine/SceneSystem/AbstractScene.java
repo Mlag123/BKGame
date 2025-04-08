@@ -22,9 +22,6 @@ public abstract class AbstractScene {
         this.tags = tags;
         if (g2 == null) {
             g2 = PanelGame.g2;
-        } else {
-
-            throw new GameObjectIsNull(this.getClass().getName() + " Graphics2D can not be null");
         }
     }
 

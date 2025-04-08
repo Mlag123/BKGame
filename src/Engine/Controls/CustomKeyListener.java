@@ -1,5 +1,6 @@
 package Engine.Controls;
 
+import Entity.AbstractEntity;
 import Entity.Player;
 import Utils.Exceptions.GameObjectIsNull;
 
@@ -7,11 +8,11 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class CustomKeyListener implements  Runnable{
-   private Player player;
+   //private AbstractEntity entity;
 
 
-    public CustomKeyListener(Player player) {
-        this.player = player;
+    public CustomKeyListener() {
+
 
 
     }
@@ -24,28 +25,9 @@ public class CustomKeyListener implements  Runnable{
                 synchronized (IsKeyPressed.class) {
                     switch (ke.getID()) {
                         case KeyEvent.KEY_PRESSED:
-                            if (ke.getKeyCode() == KeyEvent.VK_W) {
-                                player.moveUP();
-                                System.out.printf("w");
-
-                            }else if(ke.getKeyCode() == KeyEvent.VK_S){
-                                try {
-                                    player.moveDown();
-                                } catch (GameObjectIsNull e) {
-                                    throw new RuntimeException(e);
-                                }
-                            } else if (ke.getKeyCode() == KeyEvent.VK_A) {
-                                player.moveLeft();
-                            } else if (ke.getKeyCode() == KeyEvent.VK_D) {
-                                try {
-                                    player.moveRight();
-                                } catch (GameObjectIsNull e) {
-                                    throw new RuntimeException(e);
-                                }
-                            } else if (ke.getKeyCode()==KeyEvent.VK_R) {
-                                player.restart_player();
-
-                            }
+                       if(ke.getKeyCode() == KeyEvent.VK_W){
+                           System.out.println("PRESS W");
+                       }
                         case KeyEvent.KEY_RELEASED:
                             if (ke.getKeyCode() == KeyEvent.VK_W) {
 

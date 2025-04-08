@@ -62,27 +62,30 @@ public class PanelGame extends JComponent implements Runnable {
     public void start() throws GameObjectIsNull {
         //FIXME TEST CODE!!
 
-
-/*        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        //creating G2!!!
+        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics = getGraphics();*/
+        graphics = getGraphics();
 
+        //scene manager.
         sceneManager = new SceneManager();
 
+
+        //creating default scene.
         sceneManager.addScene(new DefaultScene(Tags.defaultScene));
 
-        initKeyboard();
+        initKeyboard(); //init keyboard fixme!!!
         try {
-            sceneManager.renderScene(Tags.defaultScene);
+            sceneManager.renderScene(Tags.defaultScene); //trying rendering scene, if default scene is not equil null, called SceneIsNotFound exception
         } catch (SceneIsNotFound e) {
             e.printStackTrace();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); // he stopped code. Calling stacktrace
         }
 
-        new Thread(new Runnable() {
+        new Thread(new Runnable() { //open new thread, running sound. Maybe deprecated code.
             @Override
             public void run() {
                 sound = new Sound();
@@ -92,7 +95,7 @@ public class PanelGame extends JComponent implements Runnable {
         }).start();
 
 
-        ticker.addTickListener(new TickListener() {
+        ticker.addTickListener(new TickListener() { //fixme, ticker. the game loop.
             @Override
             public void onTick(float deltaTime) {
    /*             //System.out.println(Utils.getMem());
@@ -116,7 +119,7 @@ public class PanelGame extends JComponent implements Runnable {
 
         while (start) {
             //   updateDraw();
-            ticker.update();
+            ticker.update(); //fixme! this code update ticker.
 
 
         }
@@ -125,7 +128,7 @@ public class PanelGame extends JComponent implements Runnable {
     }
 
 
-    public void drawGame() {
+    public void drawGame() { //this method calling from game loop, for update coordinate,sprite,and math function.
         player.update();
         player.gravity();
         player.draw();
@@ -133,7 +136,7 @@ public class PanelGame extends JComponent implements Runnable {
         plate.draw();
         wall.draw();
         simpleText.setText(Utils.getMem());
-        String pl = "Player X :" + player.object_vector.x + "| Player Y :" + player.object_vector.y;
+        String pl = "Player X :" + player.object_vector.x + "| Player Y :" + player.object_vector.y; //fixme debug
         textPlayerCoordinate.setText(new StringBuffer(pl));
         textManager.drawText();
     }
@@ -145,23 +148,23 @@ public class PanelGame extends JComponent implements Runnable {
         g2.fillRect(0, 0, width, height);
     }
 
-    public void render(Graphics graphics) {
+    public void render(Graphics graphics) { //for render game. Maybe deprecated
         Graphics g = graphics;
         g.drawImage(image, 0, 0, null);
         g.dispose();
     }
 
-    public void initKeyboard() {
+    public void initKeyboard() { //func for init keyboard.
     /*  key = new Key(); fixme
         requestFocus();
         addKeyListener(new CustomKeyListener(player));*/
-        customKeyListener = new CustomKeyListener(player);
+        customKeyListener = new CustomKeyListener();
         Thread thread_keyboard = new Thread(customKeyListener);
         thread_keyboard.start();
 
     }
 
-    public void initObjectGame() throws GameObjectIsNull {
+    public void initObjectGame() throws GameObjectIsNull { //init objects.
 
         player = new Player();
         //  player.changeLocation(player.getX(), player.getY());
@@ -181,7 +184,7 @@ public class PanelGame extends JComponent implements Runnable {
 
 
     @Override
-    public void run() {
+    public void run() { //For start game loop.
         try {
             start();
         } catch (GameObjectIsNull e) {
@@ -189,6 +192,7 @@ public class PanelGame extends JComponent implements Runnable {
         }
     }
 
+    @Deprecated //this func deprecated. Is not using in the future.
     public static Graphics2D getG2() {
         return g2;
     }

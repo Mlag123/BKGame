@@ -11,4 +11,6 @@ public class Wall extends AbstractObject {
         super(new ImageIcon("./Resources/Sprites/Plate/wall.png").getImage(), Tags.wall, PanelGame.g2);
 
     }
+
+
 }

@@ -22,6 +22,8 @@ public class Render {
     }
 
 
+
+
     public void draw(AbstractObject obj, Vector2D deltaPosition) {
 
     }
