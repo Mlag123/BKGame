@@ -1,8 +1,6 @@
 package Engine;
 
-import Engine.Controls.CustomKeyListener;
 import Engine.Core.ResourceLoader;
-import Engine.SceneSystem.AbstractScene;
 import Engine.SceneSystem.SceneManager;
 import Objects.Scenes.DefaultScene;
 import Objects.TextManager.Texts.SimpleText;
@@ -19,7 +17,6 @@ import Utils.Utils;
 import logging.Logging;
 import Utils.Tags;
 import Math.Vector2D;
-import Utils.Debuger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,9 +36,8 @@ public class PanelGame extends JComponent implements Runnable {
     private Ticker ticker = new Ticker(20);
     private Plate plate;
     private Wall wall;
-    private Sound sound;
+    public static Sound sound;
     //private Graphics graphics;
-    private CustomKeyListener customKeyListener;
     private LoadModFolder loadModFolder;
     private TextManager textManager;
     private SimpleText simpleText; //this a debug text;
@@ -86,12 +82,24 @@ public class PanelGame extends JComponent implements Runnable {
             public void run() {
                 sound = new Sound();
                 sound.setFile(ResourceLoader.testMusic);
-                //   sound.play();
+
             }
         }).start();
 
 
-        ticker.addTickListener(new TickListener() { //fixme, ticker. the game loop.
+
+       GameTicker ticker1 = new GameTicker(20, ()->{
+           try {
+               sceneManager.renderScene(Tags.defaultScene);
+
+           } catch (SceneIsNotFound e) {
+
+           } catch (Exception e) {
+           }
+           render(getGraphics());
+       });
+       ticker1.start();
+       /* ticker.addTickListener(new TickListener() { //fixme, ticker. the game loop.
             @Override
             public void onTick(float deltaTime) {
 
@@ -103,7 +111,7 @@ public class PanelGame extends JComponent implements Runnable {
 
                 } catch (Exception e) {
                 }
-   /*             //System.out.println(Utils.getMem());
+   *//*             //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
                 plate.changeLocation(30, 420);
                 wall.changeLocation(250, 300);
@@ -113,7 +121,7 @@ public class PanelGame extends JComponent implements Runnable {
 
 
                 render(getGraphics());
-*/
+*//*
                // drawBackground();
 
                 render(getGraphics());
@@ -127,7 +135,7 @@ public class PanelGame extends JComponent implements Runnable {
             ticker.update(); //fixme! this code update ticker.
 
 
-        }
+        */
 
 
     }

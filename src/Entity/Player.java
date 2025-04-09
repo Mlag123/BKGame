@@ -2,6 +2,7 @@ package Entity;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Engine.Core.ResourceLoader;
@@ -92,7 +93,6 @@ public class Player extends AbstractEntity {
               try {
                   if (collaiderSystem2D.isGrounded(this,PanelGame.objectArrayList,Tags.plate)) { //fixme
 
-
                       double _y;
                       _y = y;
                       y = (_y + 20 * 0.2);
@@ -119,7 +119,7 @@ public class Player extends AbstractEntity {
             isJumping = true;
             double _y;
             _y = y;
-            y = (_y - 150 * speed);
+            y = (_y - 20);
 
         } else {
             isJumping = false;
@@ -150,6 +150,13 @@ public class Player extends AbstractEntity {
 
                 if(collaiderSystem2D.hasWallLeft(this,PanelGame.objectArrayList,Tags.wall)) {
                     x = x - 5 * speed;
+                }else {
+                    try {
+                        PanelGame.sound.stop();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
 
             }
@@ -168,6 +175,12 @@ public class Player extends AbstractEntity {
 
                 if(collaiderSystem2D.hasWallRight(this,PanelGame.objectArrayList,Tags.wall)) {
                     x = x +5*speed;
+
+
+                }else {
+                    PanelGame.sound.play();
+
+
                 }
 
             }

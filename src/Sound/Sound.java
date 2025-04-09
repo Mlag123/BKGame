@@ -24,10 +24,9 @@ public class Sound {
     }
 
     public void stop() throws IOException {
-        sound.close();
-        clip.close();
-        ;
+
         clip.stop();
+
     }
 
 }

@@ -1,6 +1,5 @@
 package Engine.SceneSystem;
 
-import Engine.Controls.CustomKeyListener;
 import Engine.PanelGame;
 import Engine.Window;
 import Math.GameObjects.IAbstractScene;
