@@ -4,6 +4,8 @@ import Math.GameObjects.AbstractObject;
 import Utils.Exceptions.GameObjectIsNull;
 import Utils.Tags;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class CollaiderSystem2D {
@@ -37,7 +39,38 @@ public class CollaiderSystem2D {
 
     }
     //наудивлене частично коим боком это как то работает
-    public boolean isCollisionEntered(AbstractObject gameObject1, ArrayList<AbstractObject> arrayList, Tags tags) throws GameObjectIsNull {
+
+    public boolean intersectsDebug(Rectangle2D a, Rectangle2D b) {
+        boolean result = a.intersects(b);
+        System.out.printf("RectA: [x=%.2f, y=%.2f, w=%.2f, h=%.2f]%n",
+                a.getX(), a.getY(), a.getWidth(), a.getHeight());
+        System.out.printf("RectB: [x=%.2f, y=%.2f, w=%.2f, h=%.2f]%n",
+                b.getX(), b.getY(), b.getWidth(), b.getHeight());
+        System.out.printf("Intersects: %b%n", result);
+        return result;
+    }
+
+    public boolean isGrounded(AbstractObject gameObject1, ArrayList<AbstractObject> objectsList, Tags tags) throws GameObjectIsNull {
+        {
+
+            AbstractObject gameObject = objectsList.stream()
+                    .filter(obj -> obj.getTag().equals(tags))
+                    .findFirst()
+                    .orElseThrow(() -> new GameObjectIsNull("Objects with tag " + tags + " not found"));
+
+            Rectangle2D bound1 = gameObject.rectangle2D;
+            Rectangle2D bound2 = gameObject1.rectangle2D;
+
+
+
+
+            return !bound1.intersects(bound2);
+        }
+
+
+
+
+      /*  public boolean isCollisionEntered(AbstractObject gameObject1, ArrayList<AbstractObject> arrayList, Tags tags) throws GameObjectIsNull {
         AbstractObject gameObject2 = null;
         for (AbstractObject obj : arrayList) {
             if (obj.getTag().equals(tags)) {
@@ -73,8 +106,50 @@ public class CollaiderSystem2D {
         }
 
 
+ AbstractObject gameObject = objectsList.stream()
+                    .filter(obj -> obj.getTag().equals(tags))
+                    .findFirst()
+                    .orElseThrow(() -> new GameObjectIsNull("Objects with tag " + tags + " not found"));
 
-
+    }*/
     }
 
+    public boolean hasWallLeft(AbstractObject playerBounds, ArrayList<AbstractObject> walls,Tags tag) throws GameObjectIsNull {
+
+        AbstractObject _gameObject = walls.stream()
+                .filter(obj -> obj.getTag().equals(tag))
+                .findFirst()
+                .orElseThrow(()-> new GameObjectIsNull("Object: "+tag + " - is not found"));
+
+
+        Rectangle2D leftCheck = new Rectangle2D.Double(
+                playerBounds.object_vector.getX() - 1, // -1 для проверки слева
+                playerBounds.object_vector.getY() + 5,  // +5 чтобы игнорировать углы
+                1,                       // Тонкая линия слева
+                playerBounds.spriteHeight - 10 // Игнорируем верх/низ
+        );
+
+
+
+        return !leftCheck.intersects(_gameObject.rectangle2D);
+    }
+
+    // Возвращает true, если есть стена справа
+    public boolean hasWallRight(AbstractObject playerBounds, ArrayList<AbstractObject> walls,Tags tag) throws GameObjectIsNull {
+
+
+        AbstractObject _gameObject = walls.stream()
+                .filter(obj -> obj.getTag().equals(tag))
+                .findFirst()
+                .orElseThrow(()-> new GameObjectIsNull("Object: "+tag + " - is not found"));
+
+        Rectangle2D rightCheck = new Rectangle2D.Double(
+                playerBounds.object_vector.getX() + playerBounds.spriteWidth,
+                playerBounds.object_vector.getY() + 5,
+                1,
+                playerBounds.spriteHeight - 10
+        );
+
+        return !rightCheck.intersects(_gameObject.rectangle2D);
+    }
 }

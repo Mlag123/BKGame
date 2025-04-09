@@ -31,7 +31,7 @@ public abstract class AbstractEntity extends AbstractObject {
         super(imageSprites,tags,g2);
         this.g2 = g2;
         object_vector = new Vector2D();
-        object_collision = new Rectangle((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
+        rectangle2D = new Rectangle((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
         spriteHeight = imageSprites.getHeight(null);
         spriteWidth = imageSprites.getWidth(null);
         image = imageSprites;
@@ -56,7 +56,7 @@ public abstract class AbstractEntity extends AbstractObject {
 
     public void draw() {
         if(g2 !=  null){
-            object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
+            rectangle2D.setRect((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
             AffineTransform oldTrans = g2.getTransform();
             g2.translate(object_vector.getX(), object_vector.getY());
             g2.drawImage(image, 0, 0, null);

@@ -1,47 +1,71 @@
 package Objects.Scenes;
 
-import Engine.PanelGame;
+import Engine.Controls.CustomKeyListener;
 import Engine.SceneSystem.AbstractScene;
 import Entity.Player;
 import Objects.Plate;
+import Objects.Wall;
 import Utils.Exceptions.GameObjectIsNull;
 import Utils.Tags;
 
 import java.awt.*;
-import java.nio.Buffer;
 
 public class DefaultScene extends AbstractScene {
     private Plate testPlate;
     private Player player;
+    private CustomKeyListener customKeyListener = null;
+    private Wall wall = null;
 
     public DefaultScene(Tags tags) throws GameObjectIsNull {
         super(tags);
     }
 
-    @Override
+
     public void draw() {
         testPlate.draw();
+        player.update();
         player.draw();
+        player.gravity();
+        wall.draw();
+
     }
 
-    @Override
-    public void updateObjects() {
+    public void initKeyboard() {
+        customKeyListener = new CustomKeyListener(this.player);
+        Thread thread_keyboard = new Thread(customKeyListener);
+        thread_keyboard.start();
+    }
 
-        testPlate.changeLocation(20, 80);
-        player.changeLocation(30,30);
-        draw();
+
+    public void update() {
         drawBackground(new Color(0x008EFB));
+        draw();
+        testPlate.changeLocation(0, 500);
+        wall.changeLocation(450,350);
+
+
+        //   player.changeLocation(870,660);
 
     }
 
-    @Override
-    public void initObjects() {
+    public void init() {
+
+        wall = new Wall();
         testPlate = new Plate();
         try {
             player = new Player();
         } catch (GameObjectIsNull e) {
             throw new RuntimeException(e);
         }
+        initKeyboard();
+
+    }
+
+    public void start() {
+
+    }
+
+    public void destroy() {
 
     }
 }

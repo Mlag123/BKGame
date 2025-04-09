@@ -27,26 +27,34 @@ public class SceneManager implements IScene {
         sceneList.add(scene);
     }
 
-    public AbstractScene getScene(Tags sceneTag) throws SceneIsNotFound {
+    public AbstractScene getScene(Tags sceneTag) throws SceneIsNotFound {  //fixme
         for (AbstractScene abstractScene : sceneList) {
             Tags tag = abstractScene.getTags();
-            if (tag.equals(sceneTag)) {
+            if (tag.equals(sceneTag))
                 return abstractScene;
-            }
+
         }
         throw new SceneIsNotFound("Scene '" + sceneTag + "' is not found");
     }
 
-    public void renderScene(Tags tag) throws Exception {
+    public void initScene(Tags tag){
+        if(g2 != null){
+            for (AbstractScene _scene :sceneList){
+                if (_scene.getTags().equals(tag))
+                    _scene.init();
+            }
+        }
+    }
+
+
+    public void renderScene(Tags tag) throws Exception { //fixme
      if(g2 != null){
          for (AbstractScene _scene : sceneList) {
-
              if (_scene.getTags().equals(tag)) {
-                 _scene.initObjects();
 
-                 while (isEnable) {
-                     _scene.updateObjects();
-                 }
+
+                 _scene.update();
+
              }else {
                  throw new SceneIsNotFound("Scene "+tag+" is not found");
              }

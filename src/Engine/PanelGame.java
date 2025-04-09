@@ -40,7 +40,7 @@ public class PanelGame extends JComponent implements Runnable {
     private Plate plate;
     private Wall wall;
     private Sound sound;
-    private Graphics graphics;
+    //private Graphics graphics;
     private CustomKeyListener customKeyListener;
     private LoadModFolder loadModFolder;
     private TextManager textManager;
@@ -67,7 +67,7 @@ public class PanelGame extends JComponent implements Runnable {
         g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics = getGraphics();
+      //   graphics = getGraphics();
 
         //scene manager.
         sceneManager = new SceneManager();
@@ -77,13 +77,9 @@ public class PanelGame extends JComponent implements Runnable {
         sceneManager.addScene(new DefaultScene(Tags.defaultScene));
 
         initKeyboard(); //init keyboard fixme!!!
-        try {
-            sceneManager.renderScene(Tags.defaultScene); //trying rendering scene, if default scene is not equil null, called SceneIsNotFound exception
-        } catch (SceneIsNotFound e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            throw new RuntimeException(e); // he stopped code. Calling stacktrace
-        }
+
+        sceneManager.initScene(Tags.defaultScene); //trying rendering scene, if default scene is not equil null, called SceneIsNotFound exception
+
 
         new Thread(new Runnable() { //open new thread, running sound. Maybe deprecated code.
             @Override
@@ -98,6 +94,15 @@ public class PanelGame extends JComponent implements Runnable {
         ticker.addTickListener(new TickListener() { //fixme, ticker. the game loop.
             @Override
             public void onTick(float deltaTime) {
+
+
+                try {
+                    sceneManager.renderScene(Tags.defaultScene);
+
+                } catch (SceneIsNotFound e) {
+
+                } catch (Exception e) {
+                }
    /*             //System.out.println(Utils.getMem());
                 player.changeLocation(0, 0);
                 plate.changeLocation(30, 420);
@@ -109,9 +114,9 @@ public class PanelGame extends JComponent implements Runnable {
 
                 render(getGraphics());
 */
-                //drawBackground();
+               // drawBackground();
 
-//                render(getGraphics());
+                render(getGraphics());
 
             }
 
@@ -158,9 +163,7 @@ public class PanelGame extends JComponent implements Runnable {
     /*  key = new Key(); fixme
         requestFocus();
         addKeyListener(new CustomKeyListener(player));*/
-        customKeyListener = new CustomKeyListener();
-        Thread thread_keyboard = new Thread(customKeyListener);
-        thread_keyboard.start();
+
 
     }
 

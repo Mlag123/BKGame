@@ -9,10 +9,11 @@ import Utils.Tags;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
-public abstract class AbstractObject implements IHasRender {
+public abstract class AbstractObject {
     public Vector2D object_vector;
-    public Rectangle object_collision;
+    public Rectangle2D rectangle2D;
     private Graphics2D g2 = null;
     public final float speed = 0.3f;
     public static final double Bullet_SIZE = 42;
@@ -29,7 +30,7 @@ public abstract class AbstractObject implements IHasRender {
         this.g2 = g2;
         this.tag = tags;
         object_vector = new Vector2D();
-        object_collision = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
+        rectangle2D = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
         PanelGame.objectArrayList.add(this);
         spriteHeight = image.getHeight(null);
         spriteWidth = image.getWidth(null);
@@ -40,7 +41,7 @@ public abstract class AbstractObject implements IHasRender {
     public AbstractObject(Tags tags) {
         this.tag = tags;
         object_vector = new Vector2D();
-        object_collision = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
+        rectangle2D = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
         PanelGame.objectArrayList.add(this);
 
     }
@@ -69,10 +70,14 @@ public abstract class AbstractObject implements IHasRender {
         return angle;
     }
 
+    public Rectangle2D getRectangle2D() {
+        return rectangle2D;
+    }
+
     public void draw() {
         if (getVisibleState()) {
            if(g2 !=null){
-               object_collision.setBounds((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
+               rectangle2D.setRect((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
                AffineTransform oldTrans = g2.getTransform();
                g2.translate(object_vector.getX(), object_vector.getY());
                g2.drawImage(image, 0, 0, null);

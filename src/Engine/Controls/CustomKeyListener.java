@@ -10,9 +10,10 @@ import java.awt.event.KeyEvent;
 public class CustomKeyListener implements  Runnable{
    //private AbstractEntity entity;
 
+    private Player player;
 
-    public CustomKeyListener() {
-
+    public CustomKeyListener(Player player) {
+this.player = player;
 
 
     }
@@ -27,6 +28,28 @@ public class CustomKeyListener implements  Runnable{
                         case KeyEvent.KEY_PRESSED:
                        if(ke.getKeyCode() == KeyEvent.VK_W){
                            System.out.println("PRESS W");
+                           player.moveUP();
+                       }
+                       if (ke.getKeyCode()==KeyEvent.VK_A){
+                           try {
+                               player.moveLeft();
+                           } catch (GameObjectIsNull e) {
+                               throw new RuntimeException(e);
+                           }
+                       }
+                       if (ke.getKeyCode()== KeyEvent.VK_D){
+                           try {
+                               player.moveRight();
+                           } catch (GameObjectIsNull e) {
+                               throw new RuntimeException(e);
+                           }
+                       }
+                       if (ke.getKeyCode() == KeyEvent.VK_S){
+                           try {
+                               player.moveDown();
+                           } catch (GameObjectIsNull e) {
+                               throw new RuntimeException(e);
+                           }
                        }
                         case KeyEvent.KEY_RELEASED:
                             if (ke.getKeyCode() == KeyEvent.VK_W) {

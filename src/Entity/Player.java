@@ -75,7 +75,7 @@ public class Player extends AbstractEntity {
     public boolean isCollide() {
         for (AbstractObject abstractObject : abstractObjectsList) {
             //       System.out.println(player_collision.intersects(abstractObject.object_collision));
-            if ((object_collision.intersects(abstractObject.object_collision))) {
+            if ((rectangle2D.intersects(abstractObject.rectangle2D))) {
                 return true;
             }
         }
@@ -83,23 +83,19 @@ public class Player extends AbstractEntity {
     }
 
     public void gravity() {
-        if (isGravity) {
+        if (isGravity) { //fixme?
 
 
-            if  (limitWindow(this.object_vector,this,Direction.down,true)){
-
+            if  (limitWindow(this.object_vector,this,Direction.down,true)){ //fixme?
 
 
               try {
-                  if (!collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.plate)) {
+                  if (collaiderSystem2D.isGrounded(this,PanelGame.objectArrayList,Tags.plate)) { //fixme
 
 
                       double _y;
                       _y = y;
                       y = (_y + 20 * 0.2);
-                      //     System.out.println(new Raycast().getObject(Direction.down, x, y));
-                  } else {
-                      y = y;
                   }
               } catch (GameObjectIsNull e) {
                   throw new RuntimeException(e);
@@ -137,7 +133,7 @@ public class Player extends AbstractEntity {
     }
 
     public void moveDown() throws GameObjectIsNull {
-        if (!collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.plate)) {
+        if (collaiderSystem2D.isGrounded(this,PanelGame.objectArrayList,Tags.plate)) {
             double _y;
             _y = y;
             y = (_y + 20 * speed);
@@ -145,13 +141,17 @@ public class Player extends AbstractEntity {
         }
     }
 
-    public void moveLeft() {
+    public void moveLeft() throws GameObjectIsNull {
         //   x = (x - 120 * speed);
 
 
         if (isCollide()) {
             if (!((Window.getWidthFrame() - (x)) >= Window.getWidthFrame())) {
-                x = x -5*speed;
+
+                if(collaiderSystem2D.hasWallLeft(this,PanelGame.objectArrayList,Tags.wall)) {
+                    x = x - 5 * speed;
+                }
+
             }
 
         }
@@ -159,10 +159,16 @@ public class Player extends AbstractEntity {
 
     public void moveRight() throws GameObjectIsNull {
         if (!(0 >= Window.getWidthFrame() - (x + spriteWidth + 23))) {
+
             if (isCollide()) {
-                if(collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.wall)){
+
+              /*  if(collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.wall)){
+
+                }*/
+
+                if(collaiderSystem2D.hasWallRight(this,PanelGame.objectArrayList,Tags.wall)) {
+                    x = x +5*speed;
                 }
-                x = x +5*speed;
 
             }
         }
