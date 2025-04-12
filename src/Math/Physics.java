@@ -5,7 +5,7 @@ public class Physics {
     private double Mass;
     private double speed = 0.2;
     private double acceleration;
-    private double gravity_const = 5;
+    private double gravity_const = 9.81;
 
     private Vector2D vector2D;
 

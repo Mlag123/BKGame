@@ -4,10 +4,12 @@ import Engine.Controls.KeyboardInput;
 import Engine.SceneSystem.AbstractScene;
 import Entity.Player;
 import Objects.Plate;
+import Objects.TextManager.TextManager;
+import Objects.TextManager.Texts.SimpleText;
 import Objects.Wall;
 import Utils.Exceptions.GameObjectIsNull;
 import Utils.Tags;
-
+import Math.Vector2D;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -15,7 +17,7 @@ public class DefaultScene extends AbstractScene {
     private Plate testPlate;
     private Player player;
     private Wall wall = null;
-
+    private TextManager textManager = new TextManager();
     public DefaultScene(Tags tags) throws GameObjectIsNull {
         super(tags);
     }
@@ -63,6 +65,12 @@ public class DefaultScene extends AbstractScene {
                 throw new RuntimeException(e);
             }
         }
+        if(KeyboardInput.isKeyPressed(KeyEvent.VK_R)){
+            player.restart_player();
+        }
+        if (KeyboardInput.isKeyPressed(KeyEvent.VK_Y)){
+            System.out.println("VK_Y");
+        }
 
 
         //   player.changeLocation(870,660);
@@ -85,7 +93,7 @@ public class DefaultScene extends AbstractScene {
 
     }
 
-    public void destroy() {
+    public void destroy(Tags tag) {
 
     }
 }

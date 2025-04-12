@@ -95,7 +95,7 @@ public class Player extends AbstractEntity {
 
                       double _y;
                       _y = y;
-                      y = (_y + 20 * 0.2);
+                      y = y+1*9.81;
                   }
               } catch (GameObjectIsNull e) {
                   throw new RuntimeException(e);
