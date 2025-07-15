@@ -6,6 +6,8 @@ import Math.RaycastSystem.Direction;
 import Math.Vector2D;
 import Utils.Debuger;
 import Utils.Tags;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -23,6 +25,8 @@ public abstract class AbstractObject {
     public int spriteWidth;
     private Tags tag;
     private boolean isVisible = true; //default true!
+    private Logger log = LogManager.getLogger(this.getClass());
+
 
 
 
@@ -31,6 +35,7 @@ public abstract class AbstractObject {
         this.tag = tags;
         object_vector = new Vector2D();
         rectangle2D = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
+        log.info("X = "+ rectangle2D.getX()+" | Y = "+rectangle2D.getY());
         PanelGame.objectArrayList.add(this);
         spriteHeight = image.getHeight(null);
         spriteWidth = image.getWidth(null);

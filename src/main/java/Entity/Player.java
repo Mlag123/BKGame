@@ -15,6 +15,8 @@ import Math.RaycastSystem.Direction;
 import Math.RaycastSystem.Raycast;
 import Math.GameObjects.AbstractObject;
 import Utils.Tags;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Player extends AbstractEntity {
     public static final double PLAYER_SIZE = 64;
@@ -40,7 +42,7 @@ public class Player extends AbstractEntity {
     private CollaiderSystem2D collaiderSystem2D = new CollaiderSystem2D(this);
     private final static Image player_sprite = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
     private ArrayList<AbstractObject> abstractObjectsList = PanelGame.objectArrayList;
-
+    private Logger log = LogManager.getLogger(this.getClass());
 
     public Player() throws GameObjectIsNull {
         super(ResourceLoader.player_Sprite, Tags.player,PanelGame.g2);

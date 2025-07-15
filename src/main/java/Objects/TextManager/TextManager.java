@@ -9,8 +9,7 @@ import Engine.PanelGame;
 import Math.Vector2D;
 import Objects.TextManager.Texts.IDynamicText;
 import Objects.TextManager.Texts.SimpleText;
-import logging.Logging;
-import logging.logs;
+
 
 import javax.imageio.plugins.tiff.GeoTIFFTagSet;
 
@@ -44,7 +43,7 @@ public class TextManager {
                 return true;
             }
         }
-        Logging.log(logs.warn, "The object " + simpleText.getTag() + "does not exist in the list");
+     //   Logging.log(logs.warn, "The object " + simpleText.getTag() + "does not exist in the list");
         return false;
     }
 
@@ -56,7 +55,7 @@ public class TextManager {
         g2.setColor(color);
         g2.drawString(String.valueOf(text), dx, dy);
         g2.setTransform(oldTrans);
-        Logging.log(logs.warn, "update");
+     //   Logging.log(logs.warn, "update");
     }
 
     //fixme render dynamic text;

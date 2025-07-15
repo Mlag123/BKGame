@@ -4,8 +4,7 @@ import Engine.PanelGame;
 import Engine.Ticker;
 import Math.GameObjects.AbstractObject;
 import Math.GameObjects.IHasRender;
-import logging.Logging;
-import logging.logs;
+
 import Math.Vector2D;
 
 import javax.swing.*;

@@ -14,7 +14,6 @@ import Objects.Wall;
 import Sound.Sound;
 import Utils.Exceptions.SceneIsNotFound;
 import Utils.Utils;
-import logging.Logging;
 import Utils.Tags;
 import Math.Vector2D;
 
@@ -48,10 +47,8 @@ public class PanelGame extends JComponent implements Runnable {
 
 
     public PanelGame() {
-        Logging.log("Loading mod");
-        Logging.log("Created Example mod");
         loadModFolder = new LoadModFolder();
-        Logging.log("Mods load.");
+
 
     }
 
