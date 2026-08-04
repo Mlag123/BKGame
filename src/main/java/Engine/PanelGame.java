@@ -1,6 +1,7 @@
 package Engine;
 
 import Engine.Core.ResourceLoader;
+import Engine.SceneSystem.AbstractScene;
 import Engine.SceneSystem.SceneManager;
 import Objects.Scenes.DefaultScene;
 import Objects.TextManager.Texts.SimpleText;
@@ -19,6 +20,8 @@ import Math.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -42,6 +45,10 @@ public class PanelGame extends JComponent implements Runnable {
     private SimpleText simpleText; //this a debug text;
     private SimpleText textPlayerCoordinate;
     private SceneManager sceneManager;
+    private static final int TARGET_FPS = 60;
+    private static final int TARGET_UPS = 60;
+
+    private long lastTime = System.nanoTime();
 
     //  private TextManager fps_monitor;
 
@@ -60,7 +67,7 @@ public class PanelGame extends JComponent implements Runnable {
         g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-      //   graphics = getGraphics();
+        //   graphics = getGraphics();
 
         //scene manager.
         sceneManager = new SceneManager();
@@ -78,67 +85,84 @@ public class PanelGame extends JComponent implements Runnable {
             @Override
             public void run() {
                 sound = new Sound();
-                sound.setFile(ResourceLoader.testMusic);
+                sound.setFile(ResourceLoader.getImagePath(ResourceLoader.testMusic));
 
             }
         }).start();
 
 
 
-       GameTicker ticker1 = new GameTicker(20, ()->{
-           try {
-               sceneManager.renderScene(Tags.defaultScene);
-
-           } catch (SceneIsNotFound e) {
-
-           } catch (Exception e) {
-           }
-           render(getGraphics());
-       });
-       ticker1.start();
-       /* ticker.addTickListener(new TickListener() { //fixme, ticker. the game loop.
+        addMouseListener(new MouseAdapter() {
             @Override
-            public void onTick(float deltaTime) {
+            public void mouseClicked(MouseEvent e) {
+                int mouseX = e.getX();
+                int mouseY = e.getY();
+                System.out.println("Click!: x=: (" + mouseX + ", y=: " + mouseY + ")");
+                int a =JOptionPane.showConfirmDialog(null, "ТЫ ПИДОРАС X = "+mouseX +" И ЕЩЕ ХУЕСОС ЕБУЧИЙ Y = "+mouseY);
+                if (a == 0){
+                    JOptionPane.showMessageDialog(null,"ДА И ПОШЁЛ ТЫ НАХУЙ");
+                }else if (a == 1){
+                    JOptionPane.showMessageDialog(null,"гарс пидорас");
 
+                }else if (a == 2){
+                    JOptionPane.showMessageDialog(null,"го завод");
 
-                try {
-                    sceneManager.renderScene(Tags.defaultScene);
-
-                } catch (SceneIsNotFound e) {
-
-                } catch (Exception e) {
                 }
-   *//*             //System.out.println(Utils.getMem());
-                player.changeLocation(0, 0);
-                plate.changeLocation(30, 420);
-                wall.changeLocation(250, 300);
-                player.setVisible(true);
-
-                drawGame();
-
-
-                render(getGraphics());
-*//*
-               // drawBackground();
-
-                render(getGraphics());
-
             }
-
         });
 
-        while (start) {
-            //   updateDraw();
-            ticker.update(); //fixme! this code update ticker.
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                int mouseX = e.getX();
+                int mouseY = e.getY();
+                System.out.println("Moved!: x=: (" + mouseX + ", y=: " + mouseY + ")");
+            }
+        });
+
+            try {
 
 
-        */
+                AbstractScene abstractScene = sceneManager.getScene(Tags.defaultScene);
+                GameTicker ticker1 = new GameTicker(10, () -> {
+                    try {
+                        abstractScene.update();
+
+                    } catch (Exception e) {
+                    }
+                    render(getGraphics());
+                });
+                ticker1.start();
+
+
+                GameTicker ticker2 = new GameTicker(20, () -> {
+                    try {
+                        abstractScene.FixedUpdate();
+
+                    } catch (Exception e) {
+                    }
+
+                });
+                ticker2.start();
+
+
+
+                //           render(getGraphics());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+
+
+
+
+
 
 
     }
 
 
-    public void drawGame() { //this method calling from game loop, for update coordinate,sprite,and math function.
+/*    public void drawGame() { //this method calling from game loop, for update coordinate,sprite,and math function.
         player.update();
         player.gravity();
         player.draw();
@@ -149,7 +173,7 @@ public class PanelGame extends JComponent implements Runnable {
         String pl = "Player X :" + player.object_vector.x + "| Player Y :" + player.object_vector.y; //fixme debug
         textPlayerCoordinate.setText(new StringBuffer(pl));
         textManager.drawText();
-    }
+    }*/
 
 
     public void drawBackground() {

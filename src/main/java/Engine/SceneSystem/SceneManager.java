@@ -47,6 +47,9 @@ public class SceneManager implements IScene {
     }
 
 
+
+
+
     public void renderScene(Tags tag) throws Exception { //fixme
      if(g2 != null){
          for (AbstractScene _scene : sceneList) {

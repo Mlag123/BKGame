@@ -2,7 +2,7 @@ package Utils;
 
 public enum Tags {
     player("Player"), enemy("Enemy"), item("Item"), object("Object"),plate("Plate"),wall("Wall"),debug("Debug"),debugPlayer("DebugPlayer")
-    ,defaultScene("DefaultScene");
+    ,defaultScene("DefaultScene"),GARS("GARS");
 
     private String tags;
 

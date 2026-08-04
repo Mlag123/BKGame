@@ -3,14 +3,16 @@ package Sound;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 
 public class Sound {
     private Clip clip;
     private AudioInputStream sound;
 
-    public void setFile(String fileName) {
+    public void setFile(URL fileName) {
         try {
-            File file = new File(fileName);
+            File file = new File(fileName.getPath());
             sound = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(sound);

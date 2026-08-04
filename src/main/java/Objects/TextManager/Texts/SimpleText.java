@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class SimpleText extends AbstractObject {
     public StringBuffer text;
-    private Vector2D transform = Vector2D.vectorZero;
-    private Vector2D deltaTranform = Vector2D.vectorZero;
+    private Vector2D transform = Vector2D.ZERO_VECTOR;
+    private Vector2D deltaTranform = Vector2D.ZERO_VECTOR;
     private Color color;
 
     public SimpleText(Color color,Tags tag, Vector2D position,Vector2D deltaTranform) {

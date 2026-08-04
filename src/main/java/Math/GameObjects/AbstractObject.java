@@ -26,16 +26,15 @@ public abstract class AbstractObject {
     private Tags tag;
     private boolean isVisible = true; //default true!
     private Logger log = LogManager.getLogger(this.getClass());
+    private double scaleX = 1.0f;
+    private double scaleY = 1.0f;
 
-
-
-
-    public AbstractObject(Image image, Tags tags,Graphics2D g2) {
+    public AbstractObject(Image image, Tags tags, Graphics2D g2) {
         this.g2 = g2;
         this.tag = tags;
         object_vector = new Vector2D();
         rectangle2D = new Rectangle((int) object_vector.getX(), (int) object_vector.getX(), spriteWidth, spriteHeight);
-        log.info("X = "+ rectangle2D.getX()+" | Y = "+rectangle2D.getY());
+        log.info("X = " + rectangle2D.getX() + " | Y = " + rectangle2D.getY());
         PanelGame.objectArrayList.add(this);
         spriteHeight = image.getHeight(null);
         spriteWidth = image.getWidth(null);
@@ -75,24 +74,43 @@ public abstract class AbstractObject {
         return angle;
     }
 
+    public void setScale (double scale){
+        this.scaleX = scale;
+        this.scaleY = scale;
+    }
+
     public Rectangle2D getRectangle2D() {
         return rectangle2D;
     }
 
     public void draw() {
         if (getVisibleState()) {
-           if(g2 !=null){
-               rectangle2D.setRect((int) object_vector.getX(), (int) object_vector.getY(), spriteWidth, spriteHeight);
-               AffineTransform oldTrans = g2.getTransform();
-               g2.translate(object_vector.getX(), object_vector.getY());
-               g2.drawImage(image, 0, 0, null);
+            if (g2 != null) {
+                rectangle2D.setRect(
+                        (int) object_vector.getX(),
+                        (int) object_vector.getY(),
+                        spriteWidth * scaleX,
+                        spriteHeight * scaleY
+                );
+                AffineTransform oldTrans = g2.getTransform();
+                g2.translate(object_vector.getX(), object_vector.getY());
+                g2.translate(spriteWidth/2,spriteHeight/2);
+                g2.scale(scaleX,scaleY);
+                g2.drawImage(image, -spriteWidth/2, -spriteHeight/2, null);
 
-               g2.setTransform(oldTrans);
-           }
+                g2.setTransform(oldTrans);
+            }
         }
 
     }
 
+    public void additionVector(Vector2D velocity) {
+        this.object_vector = Vector2D.additionVectors(object_vector, velocity);
+    }
+
+    public void additionVector(double x, double y) {
+        this.object_vector = Vector2D.additionVectors(object_vector,x,y);
+    }
 
     public void changeLocation(double x, double y) {
         object_vector.setX(x);

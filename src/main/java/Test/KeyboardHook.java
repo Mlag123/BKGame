@@ -20,8 +20,6 @@ public class KeyboardHook {
         }
     };
 
-    public static void main(String[] args) {
-        new KeyboardHook();
-    }
+
 
 }

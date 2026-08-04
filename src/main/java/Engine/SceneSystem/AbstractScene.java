@@ -39,7 +39,9 @@ public abstract class AbstractScene implements IAbstractScene {
     public void update() {
 
     }
+    public void FixedUpdate(){
 
+    }
     public void init() {
 
     }

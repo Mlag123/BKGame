@@ -17,17 +17,16 @@ import Math.GameObjects.AbstractObject;
 import Utils.Tags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import Math.Vector2D;
 
 public class Player extends AbstractEntity {
     public static final double PLAYER_SIZE = 64;
     private Physics physics = new Physics();
     private double gravity = 150;
-   // private TextManager textManager = new TextManager();
-    //  private  Vector2D playerVector;
-    private double dx = 0;
-    private double dy = 0;
-    private double x, y;
-    private double speed = 1.2;
+    // private TextManager textManager = new TextManager();
+    private Vector2D playerVector = new Vector2D(0,0);
+
+    private double speed = 4.0f;
     private double maxSpeed = 0.2f;
     private double minSpeed = 0.1f;
     private float angle = 0;
@@ -43,9 +42,10 @@ public class Player extends AbstractEntity {
     private final static Image player_sprite = new ImageIcon("./Resources/Sprites/PlayerSprite/PlayerChar.png").getImage();
     private ArrayList<AbstractObject> abstractObjectsList = PanelGame.objectArrayList;
     private Logger log = LogManager.getLogger(this.getClass());
+    private float deltaTime;
 
     public Player() throws GameObjectIsNull {
-        super(ResourceLoader.player_Sprite, Tags.player,PanelGame.g2);
+        super(ResourceLoader.player_Sprite, Tags.player, PanelGame.g2);
         raycast = new Raycast();
 
     }
@@ -66,13 +66,10 @@ public class Player extends AbstractEntity {
     }
 
 
-
-
     public void restart_player() {
-        x = 0;
-        y = 0;
+        playerVector = Vector2D.ZERO_VECTOR;
 
-      
+
     }
 
     public boolean isCollide() {
@@ -89,23 +86,19 @@ public class Player extends AbstractEntity {
         if (isGravity) { //fixme?
 
 
-            if  (limitWindow(this.object_vector,this,Direction.down,true)){ //fixme?
+            if (limitWindow(this.object_vector, this, Direction.down, true)) { //fixme?
 
 
-              try {
-                  if (collaiderSystem2D.isGrounded(this,PanelGame.objectArrayList,Tags.plate)) { //fixme
+                try {
+                    if (collaiderSystem2D.isGrounded(this, PanelGame.objectArrayList, Tags.plate)) { //fixme
+                        playerVector.additionVectors(0,250*2f,deltaTime);
 
-                      double _y;
-                      _y = y;
-                      y = (_y + 20 * 0.2);
-                  }
-              } catch (GameObjectIsNull e) {
-                  throw new RuntimeException(e);
-              }
+                    }
+                } catch (GameObjectIsNull e) {
+                    throw new RuntimeException(e);
+                }
 
             }
-
-
 
 
         }
@@ -116,30 +109,14 @@ public class Player extends AbstractEntity {
 
     public void moveUP() {
 
-
-        if (!(y <= 0)) {
-            isJumping = true;
-            double _y;
-            _y = y;
-            y = (_y - 20);
-
-        } else {
-            isJumping = false;
-
-            y=y-y;
-
-          //  y = 0;
-        }
-
+            playerVector.additionVectors(0,-60*speed,deltaTime);
 
     }
 
     public void moveDown() throws GameObjectIsNull {
-        if (collaiderSystem2D.isGrounded(this,PanelGame.objectArrayList,Tags.plate)) {
-            double _y;
-            _y = y;
-            y = (_y + 20 * speed);
+        if (collaiderSystem2D.isGrounded(this, PanelGame.objectArrayList, Tags.plate)) {
 
+            playerVector.additionVectors(0,80,deltaTime);
         }
     }
 
@@ -148,10 +125,10 @@ public class Player extends AbstractEntity {
 
 
         if (isCollide()) {
-            if (!((Window.getWidthFrame() - (x)) >= Window.getWidthFrame())) {
+            if (!((Window.getWidthFrame() - (playerVector.getX())) >= Window.getWidthFrame())) {
 
                 if(collaiderSystem2D.hasWallLeft(this,PanelGame.objectArrayList,Tags.wall)) {
-                    x = x - 5 * speed;
+                    playerVector.additionVectors(-100*speed,0,deltaTime);
                 }else {
                     try {
                         PanelGame.sound.stop();
@@ -167,16 +144,18 @@ public class Player extends AbstractEntity {
     }
 
     public void moveRight() throws GameObjectIsNull {
-        if (!(0 >= Window.getWidthFrame() - (x + spriteWidth + 23))) {
+
+
+        if (!(0 >= Window.getWidthFrame() - (playerVector.getX() + spriteWidth + 23))) {
 
             if (isCollide()) {
 
-              /*  if(collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.wall)){
+              //*  if(collaiderSystem2D.isCollisionEntered(this,PanelGame.objectArrayList,Tags.wall)){
 
-                }*/
+                }//*
 
                 if(collaiderSystem2D.hasWallRight(this,PanelGame.objectArrayList,Tags.wall)) {
-                    x = x +5*speed;
+                   playerVector.additionVectors(100*speed,0,deltaTime);
 
 
                 }else {
@@ -186,7 +165,7 @@ public class Player extends AbstractEntity {
                 }
 
             }
-        }
+    }
 
 //
 //        if (x >= 1145) {
@@ -196,18 +175,15 @@ public class Player extends AbstractEntity {
 //            x = x + 15 * speed / PanelGame.deltaTime;
 //     }
 
-
-    }
-
-
-    public void update() {
+    public void update(float deltaTime) {
+        this.deltaTime = deltaTime;
         //  System.out.println("x pos :"+x+" y pos "+ y);
 
         //    System.out.println("X = "+x+" Y = "+y);
 
-     if (getVisibleState()){
-         object_vector.changeCoordinates(x, y);
-     }
+        if (getVisibleState()) {
+            object_vector.changeCoordinates(playerVector);
+        }
 
         //   System.out.println(x+" "+y);
 
@@ -216,4 +192,9 @@ public class Player extends AbstractEntity {
 
 
     }
+
+
 }
+
+
+

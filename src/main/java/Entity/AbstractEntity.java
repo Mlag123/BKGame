@@ -38,13 +38,14 @@ public abstract class AbstractEntity extends AbstractObject {
     }
 
     public void ShowDebugText(Graphics2D g2d) {
-        Graphics g = (Graphics) g2d;
+        // Graphics g = (Graphics) g2d;
         int x, y;
         x = (int) object_vector.getX();
         y = (int) object_vector.getY() + spriteHeight + 20;
 
-
-        g.drawString("pX = " + object_vector.getX() + "| pY = " + object_vector.getY(), x, y);
+        g2d.setFont(new Font("Arial",Font.BOLD,15));
+        g2d.setColor(Color.BLACK);
+        g2d.drawString("pX = " + object_vector.getX() + "| pY = " + object_vector.getY(), x, y);
         //  g2d.drawString("pX = " + vector2DEntity.getX() + "| pY = " + vector2DEntity.getY(), 200,300);
 
     }
